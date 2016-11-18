@@ -1,62 +1,68 @@
 ﻿<?php
- /**
+/**
  * Teste si un quelconque visiteur est connecté
- * @return vrai ou faux 
+ *
+ * @return bool Vrai ou faux
  */
 function estConnecte(){
   return isset($_SESSION['idVisiteur']);
 }
+
 /**
  * Enregistre dans une variable session les infos d'un visiteur
- 
- * @param $id 
- * @param $nom
- * @param $prenom
+ *
+ * @param $id int ID du visiteur
+ * @param $nom string Nom du visiteur
+ * @param $prenom string Prénom du visiteur
  */
-function connecter($id,$nom,$prenom){
+function connecter($id, $nom, $prenom){
 	$_SESSION['idVisiteur']= $id; 
 	$_SESSION['nom']= $nom;
 	$_SESSION['prenom']= $prenom;
 }
+
 /**
  * Détruit la session active
  */
 function deconnecter(){
-	session_destroy();
+    session_destroy();
 }
+
 /**
- * Transforme une date au format français jj/mm/aaaa vers le format anglais aaaa-mm-jj
- 
- * @param $madate au format  jj/mm/aaaa
- * @return la date au format anglais aaaa-mm-jj
-*/
+ * Transforme une date au format Français (jj/mm/aaaa) vers le format Anglais (aaaa-mm-jj)
+ *
+ * @param $maDate DateTime La date au format Français (jj/mm/aaa)
+ * @return false|string La date au format Anglais (aaaa-mm-jj)
+ */
 function dateFrancaisVersAnglais($maDate){
-	@list($jour,$mois,$annee) = explode('/',$maDate);
-	return date('Y-m-d',mktime(0,0,0,$mois,$jour,$annee));
+    @list($jour,$mois,$annee) = explode('/',$maDate);
+    return date('Y-m-d',mktime(0,0,0,$mois,$jour,$annee));
 }
+
 /**
- * Transforme une date au format format anglais aaaa-mm-jj vers le format français jj/mm/aaaa 
- 
- * @param $madate au format  aaaa-mm-jj
- * @return la date au format format français jj/mm/aaaa
-*/
+ * Transforme une date au format format Anglais (aaaa-mm-jj) vers le format Français (jj/mm/aaaa)
+ *
+ * @param $maDate DateTime La date au format Aglais (aaaa-mm-jj)
+ * @return string La date au format Français (jj/mm/aaaa)
+ */
 function dateAnglaisVersFrancais($maDate){
-   @list($annee,$mois,$jour)=explode('-',$maDate);
-   $date="$jour"."/".$mois."/".$annee;
-   return $date;
+    @list($annee,$mois,$jour)=explode('-',$maDate);
+    $date="$jour"."/".$mois."/".$annee;
+    return $date;
 }
+
 /**
- * retourne le mois au format aaaamm selon le jour dans le mois
- 
- * @param $date au format  jj/mm/aaaa
- * @return le mois au format aaaamm
-*/
+ * Retourne le mois au format aaaamm selon le jour dans le mois
+ *
+ * @param $date DateTime La date au format Français (jj/mm/aaaa)
+ * @return string Le mois au format aaaamm
+ */
 function getMois($date){
-		@list($jour,$mois,$annee) = explode('/',$date);
-		if(strlen($mois) == 1){
-			$mois = "0".$mois;
-		}
-		return $annee.$mois;
+    @list($jour,$mois,$annee) = explode('/',$date);
+    if(strlen($mois) == 1){
+        $mois = "0".$mois;
+    }
+    return $annee.$mois;
 }
 
 /* gestion des erreurs*/
