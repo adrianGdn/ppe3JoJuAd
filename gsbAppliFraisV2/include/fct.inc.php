@@ -65,12 +65,12 @@ function getMois($date){
     return $annee.$mois;
 }
 
-/* gestion des erreurs*/
+/* Gestion des erreurs */
 /**
  * Indique si une valeur est un entier positif ou nul
- 
- * @param $valeur
- * @return vrai ou faux
+ *
+ * @param $valeur int L'entier que l'on veut tester
+ * @return bool Vrai ou faux
 */
 function estEntierPositif($valeur) {
 	return preg_match("/[^0-9]/", $valeur) == 0;
@@ -79,9 +79,9 @@ function estEntierPositif($valeur) {
 
 /**
  * Indique si un tableau de valeurs est constitué d'entiers positifs ou nuls
- 
+ *
  * @param $tabEntiers : le tableau
- * @return vrai ou faux
+ * @return bool Vrai ou faux
 */
 function estTableauEntiers($tabEntiers) {
 	$ok = true;
@@ -94,11 +94,12 @@ function estTableauEntiers($tabEntiers) {
 	}
 	return $ok;
 }
+
 /**
  * Vérifie si une date est inférieure d'un an à la date actuelle
- 
- * @param $dateTestee 
- * @return vrai ou faux
+ *
+ * @param DateTime $dateTestee La date que l'on veut tester
+ * @return bool Vrai ou faux
 */
 function estDateDepassee($dateTestee){
 	$dateActuelle=date("d/m/Y");
@@ -109,10 +110,10 @@ function estDateDepassee($dateTestee){
 	return ($anneeTeste.$moisTeste.$jourTeste < $AnPasse); 
 }
 /**
- * Vérifie la validité du format d'une date française jj/mm/aaaa 
- 
- * @param $date 
- * @return vrai ou faux
+ * Vérifie la validité du format d'une date Française (jj/mm/aaaa)
+ *
+ * @param $date DateTime La date que l'on veut tester
+ * @return bool Vrai ou faux
 */
 function estDateValide($date){
 	$tabDate = explode('/',$date);
@@ -134,34 +135,33 @@ function estDateValide($date){
 }
 
 /**
- * Vérifie que le tableau de frais ne contient que des valeurs numériques 
- 
- * @param $lesFrais 
- * @return vrai ou faux
+ * Vérifie que le tableau de frais ne contient que des valeurs numériques
+ *
+ * @param $lesFrais : Le tableau de frais que l'on veut tester
+ * @return bool Vrai ou faux
 */
 function lesQteFraisValides($lesFrais){
 	return estTableauEntiers($lesFrais);
 }
 /**
- * Vérifie la validité des trois arguments : la date, le libellé du frais et le montant 
- 
+ * Vérifie la validité des trois arguments : la date, le libellé du frais et le montant,
  * des message d'erreurs sont ajoutés au tableau des erreurs
- 
- * @param $dateFrais 
- * @param $libelle 
- * @param $montant
+ *
+ * @param $dateFrais DateTime La date
+ * @param $libelle string Le libellé du frais
+ * @param $montant double Le montant
  */
 function valideInfosFrais($dateFrais,$libelle,$montant){
 	if($dateFrais==""){
 		ajouterErreur("Le champ date ne doit pas être vide");
 	}
 	else{
-		if(!estDatevalide($dateFrais)){
+		if(!estDateValide($dateFrais)){
 			ajouterErreur("Date invalide");
 		}	
 		else{
 			if(estDateDepassee($dateFrais)){
-				ajouterErreur("date d'enregistrement du frais dépassé, plus de 1 an");
+				ajouterErreur("Date d'enregistrement du frais dépassé, plus de 1 an");
 			}			
 		}
 	}
@@ -176,21 +176,23 @@ function valideInfosFrais($dateFrais,$libelle,$montant){
 			ajouterErreur("Le champ montant doit être numérique");
 		}
 }
+
 /**
- * Ajoute le libellé d'une erreur au tableau des erreurs 
- 
- * @param $msg : le libellé de l'erreur 
+ * Ajoute le libellé d'une erreur au tableau des erreurs
+ *
+ * @param $msg string Le libellé du message d'erreur à ajouter
  */
 function ajouterErreur($msg){
-   if (! isset($_REQUEST['erreurs'])){
-      $_REQUEST['erreurs']=array();
-	} 
-   $_REQUEST['erreurs'][]=$msg;
+    if (! isset($_REQUEST['erreurs'])){
+        $_REQUEST['erreurs']=array();
+    }
+    $_REQUEST['erreurs'][]=$msg;
 }
+
 /**
  * Retoune le nombre de lignes du tableau des erreurs 
  
- * @return le nombre d'erreurs
+ * @return int Le nombre d'erreurs
  */
 function nbErreurs(){
    if (!isset($_REQUEST['erreurs'])){
