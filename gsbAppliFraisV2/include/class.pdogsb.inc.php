@@ -311,6 +311,17 @@ class PdoGsb{
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}
+
+    public function testAdmin($idVisiteur){
+        $req = "select acteur.idTypeActeur as type from acteur where acteur.id ='$idVisiteur'";
+        $res = PdoGsb::$monPdo->query($req);
+        $laLigne = $res->fetch();
+        $leType = $laLigne['type'];
+        if($leType == 3)
+            return true;
+        else
+            return false;
+    }
 	
 	
 }

@@ -43,7 +43,12 @@ switch($action){
 			$prenom = $visiteur['prenom'];
 			$typeActeur = $visiteur['typeActeur'];
 			connecter($id, $nom, $prenom, $typeActeur);
-			include("vues/v_sommaire.php");
+
+            if($pdo->testAdmin($id) == true)
+                include("vues/v_sommaireAdmin.php");
+            else
+                include("vues/v_sommaire.php");
+
 			}
 
 			break;	
