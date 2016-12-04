@@ -19,8 +19,8 @@
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbapplifrais';   		
-      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $mdp='adrian' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
 
@@ -53,7 +53,7 @@ class PdoGsb{
  
  * @param $login 
  * @param $mdp
- * @return mixed l'id, le type,le nom, le prénom et le type d'acteur sous la forme d'un tableau associatif
+ * @return mixed l'id, le type, le nom, le prénom et le type d'acteur sous la forme d'un tableau associatif
 */
     public function getInfosVisiteur($login, $mdp){
         $req = "select acteur.id as id, acteur.nom as nom, acteur.prenom as prenom, acteur.idTypeActeur as typeActeur from acteur 
@@ -62,8 +62,18 @@ class PdoGsb{
         $ligne = $rs->fetch();
         return $ligne;
     }
-	
 
+    /**
+     * Retourne toutes les frais forfait qui sont sur la base de données
+     *
+     * @return mixed L'id, le libelle et le montant sous la forme d'un tableau associatif
+     */
+    public function getFraisForfait() {
+        $req = "SELECT fraisforfait.id as id, fraisforfait.libelle as libelle, fraisforfait.montant as montant FROM fraisforfait;";
+        $rs = PdoGsb::$monPdo->query($req);
+        $fraisForfait = $rs->fetch();
+        return $fraisForfait;
+    }
 
 	
 /**
