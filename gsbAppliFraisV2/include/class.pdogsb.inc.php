@@ -11,7 +11,7 @@
  * $monPdoGsb qui contiendra l'unique instance de la classe
  
  * @package default
- * @author Cheri Bibi
+ * @author Cheri Bibi C'est Pas Fini !
  * @version    1.0
  * @link       http://www.php.net/manual/fr/book.pdo.php
  */
@@ -19,8 +19,8 @@
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbapplifrais';   		
-      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='adrian' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
 
@@ -350,8 +350,8 @@ class PdoGsb{
      */
     public function getFraisForfait() {
         $req = "SELECT fraisforfait.id as id, fraisforfait.libelle as libelle, fraisforfait.montant as montant FROM fraisforfait;";
-        $rs = PdoGsb::$monPdo->query($req);
-        $fraisForfait = $rs->fetch();
+        $res = PdoGsb::$monPdo->query($req);
+        $fraisForfait = $res->fetch();
         return $fraisForfait;
     }
 
