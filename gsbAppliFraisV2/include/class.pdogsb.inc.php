@@ -332,6 +332,11 @@ class PdoGsb{
         else
             return false;
     }
+
+    public function addFraisForfait($idForfait, $libelleForfait, $montantForfait) {
+        $req = "INSERT INTO fraisforfait(id, libelle, montant) VALUES ('$idForfait','$libelleForfait','$montantForfait')";
+        PdoGsb::$monPdo->exec($req);
+    }
 	
 	
 }
