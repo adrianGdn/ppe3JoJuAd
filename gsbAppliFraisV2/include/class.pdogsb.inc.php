@@ -19,8 +19,8 @@
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbapplifrais';   		
-      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $mdp='adrian' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
 
@@ -351,7 +351,6 @@ class PdoGsb{
     public function getFraisForfait() {
         $req = "SELECT id, libelle, montant FROM fraisforfait;";
         $res = PdoGsb::$monPdo->query($req);
-        $fraisForfait = $res->fetch();
         return $res;
     }
 
@@ -366,6 +365,11 @@ class PdoGsb{
     public function updateFraisForfait($idFraisBase, $idForfait, $libelleForfait, $montantForfait){
         $req = "update fraisforfait set id = '$idForfait', libelle = '$libelleForfait', montant = '$montantForfait'  
 		where fraisforfait.id ='$idFraisBase'";
+        PdoGsb::$monPdo->exec($req);
+    }
+
+    public function deleteFraisForfait($id) {
+        $req = "DELETE FROM fraisforfait WHERE fraisforfait.id = '$id'";
         PdoGsb::$monPdo->exec($req);
     }
 }
