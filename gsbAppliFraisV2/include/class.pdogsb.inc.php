@@ -354,5 +354,19 @@ class PdoGsb{
         $fraisForfait = $rs->fetch();
         return $fraisForfait;
     }
+
+    /**
+     * Permet de mettre à jour un frais forfaitisé
+     *
+     * @param $idFraisBase
+     * @param $idForfait
+     * @param $libelleForfait
+     * @param $montantForfait
+     */
+    public function updateFraisForfait($idFraisBase, $idForfait, $libelleForfait, $montantForfait){
+        $req = "update fraisforfait set id = '$idForfait', libelle = '$libelleForfait', montant = '$montantForfait'  
+		where fraisforfait.id ='$idFraisBase'";
+        PdoGsb::$monPdo->exec($req);
+    }
 }
 ?>
