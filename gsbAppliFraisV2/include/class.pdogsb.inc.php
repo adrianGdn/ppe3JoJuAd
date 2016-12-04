@@ -35,6 +35,7 @@ class PdoGsb{
 	public function _destruct(){
 		PdoGsb::$monPdo = null;
 	}
+
 /**
  * Fonction statique qui crée l'unique instance de la classe
  
@@ -48,6 +49,7 @@ class PdoGsb{
 		}
 		return PdoGsb::$monPdoGsb;  
 	}
+
 /**
  * Retourne les informations d'un acteur
  
@@ -62,19 +64,6 @@ class PdoGsb{
         $ligne = $rs->fetch();
         return $ligne;
     }
-
-    /**
-     * Retourne toutes les frais forfait qui sont sur la base de données
-     *
-     * @return mixed L'id, le libelle et le montant sous la forme d'un tableau associatif
-     */
-    public function getFraisForfait() {
-        $req = "SELECT fraisforfait.id as id, fraisforfait.libelle as libelle, fraisforfait.montant as montant FROM fraisforfait;";
-        $rs = PdoGsb::$monPdo->query($req);
-        $fraisForfait = $rs->fetch();
-        return $fraisForfait;
-    }
-
 	
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
@@ -99,6 +88,7 @@ class PdoGsb{
 		}
 		return $lesLignes; 
 	}
+
 /**
  * Retourne le nombre de justificatif d'un visiteur pour un mois donné
  
@@ -112,6 +102,7 @@ class PdoGsb{
 		$laLigne = $res->fetch();
 		return $laLigne['nb'];
 	}
+
 /**
  * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
  * concernées par les deux arguments
@@ -130,6 +121,7 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes; 
 	}
+
 /**
  * Retourne tous les id de la table FraisForfait
  
@@ -141,6 +133,7 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+
 /**
  * Met à jour la table lignefraisforfait
  
@@ -163,6 +156,7 @@ class PdoGsb{
 		}
 		
 	}
+
 /**
  * met à jour le nombre de justificatifs de la table fichefrais
  * pour le mois et l'acteur concerné
@@ -176,6 +170,7 @@ class PdoGsb{
 		where fichefrais.idvisiteur = '$idVisiteur' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);	
 	}
+
 /**
  * Teste si un acteur possède une fiche de frais pour le mois passé en argument
  
@@ -195,6 +190,7 @@ class PdoGsb{
 		}
 		return $ok;
 	}
+
 /**
  * Retourne le dernier mois en cours d'un acteur
  
@@ -236,8 +232,6 @@ class PdoGsb{
 			PdoGsb::$monPdo->exec($req);
 		 }
 	}
-        
-       
 
 /**
  * Crée un nouveau frais hors forfait pour un acteur et un mois donné
@@ -255,7 +249,6 @@ class PdoGsb{
 		values(DEFAULT,'$idVisiteur','$mois','$libelle','$dateFr','$montant')";
 		PdoGsb::$monPdo->exec($req);
 	}
-	
 
 /**
  * Supprime le frais hors forfait dont l'id est passé en argument
@@ -266,6 +259,7 @@ class PdoGsb{
 		$req = "delete from lignefraishorsforfait where lignefraishorsforfait.id =$idFrais ";
 		PdoGsb::$monPdo->exec($req);
 	}
+
 /**
  * Retourne les mois pour lesquels un acteur a une fiche de frais
  
@@ -291,7 +285,6 @@ class PdoGsb{
 		}
 		return $lesMois;
 	}
-	
 
 /**
  * Retourne les informations d'une fiche de frais d'un acteur pour un mois donné
@@ -315,13 +308,18 @@ class PdoGsb{
  * @param $idVisiteur 
  * @param $mois String sous la forme aaaamm
  */
- 
 	public function majEtatFicheFrais($idVisiteur,$mois,$etat){
 		$req = "update fichefrais set idEtat = '$etat', dateModif = now() 
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}
 
+    /**
+     * Permet de vérifier si l'acteur est un administrateur
+     *
+     * @param $idVisiteur int L'ID du type d'acteur qu'est le visiteur.
+     * @return bool Vrai ou faux
+     */
     public function testAdmin($idVisiteur){
         $req = "select acteur.idTypeActeur as type from acteur where acteur.id ='$idVisiteur'";
         $res = PdoGsb::$monPdo->query($req);
@@ -333,11 +331,28 @@ class PdoGsb{
             return false;
     }
 
+    /**
+     * Permet l'ajout d'un frais forfait
+     *
+     * @param $idForfait String L'id du frais forfait
+     * @param $libelleForfait String Le libelle du frais forfait
+     * @param $montantForfait Float(5,2) Le montant du frais forfait
+     */
     public function addFraisForfait($idForfait, $libelleForfait, $montantForfait) {
         $req = "INSERT INTO fraisforfait(id, libelle, montant) VALUES ('$idForfait','$libelleForfait','$montantForfait')";
         PdoGsb::$monPdo->exec($req);
     }
-	
-	
+
+    /**
+     * Retourne toutes les frais forfait qui sont sur la base de données
+     *
+     * @return mixed L'id, le libelle et le montant sous la forme d'un tableau associatif
+     */
+    public function getFraisForfait() {
+        $req = "SELECT fraisforfait.id as id, fraisforfait.libelle as libelle, fraisforfait.montant as montant FROM fraisforfait;";
+        $rs = PdoGsb::$monPdo->query($req);
+        $fraisForfait = $rs->fetch();
+        return $fraisForfait;
+    }
 }
 ?>
