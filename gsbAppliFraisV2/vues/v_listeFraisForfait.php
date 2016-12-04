@@ -3,7 +3,7 @@
 		<div class="panel-heading">
 			<div class="panel-title"><h2></h2></div>
 			</br></br>
-		  <legend>Eléments forfaitisés</legend>			
+		  <legend>Eléments forfaitisés</legend>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" role="form" method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">

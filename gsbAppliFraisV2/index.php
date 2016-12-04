@@ -19,6 +19,9 @@ switch($uc){
 	case 'etatFrais' :{
 		include("controleurs/c_etatFrais.php");break; 
 	}
+	case 'admin' :{
+		include("controleurs/c_admin.php");break;
+	}
 	
 	
 	}

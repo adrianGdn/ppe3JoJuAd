@@ -1,13 +1,9 @@
 <?php
-include("vues/v_sommaire.php");
+include("vues/v_sommaireAdmin.php");
 $action = $_REQUEST['action'];
 switch($action){
     case 'selectionnerCRUD': {
-
-    }
-
-
-    case 'voirEtatFrais':{
+        include("vues/v_adminCRUD.php");
 
     }
 
