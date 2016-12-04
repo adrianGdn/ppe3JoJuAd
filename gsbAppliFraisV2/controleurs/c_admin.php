@@ -4,7 +4,7 @@ $action = $_REQUEST['action'];
 switch($action){
     case 'selectionnerCRUD': {
         include("vues/v_adminCRUD.php");
-
+        ;break;
     }
     case 'choixCRUD': {
                     if ($_POST['CRUD'] = "create")
@@ -20,7 +20,7 @@ switch($action){
                     {
                         include("vues/vuesCRUD/v_delete.php");
                     }
-
+        ;break;
 
     }
 
