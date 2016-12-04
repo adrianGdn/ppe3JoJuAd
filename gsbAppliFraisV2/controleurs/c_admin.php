@@ -14,7 +14,7 @@ switch($action){
         $pdo->addFraisForfait($idFrais, $libelleFrais, $montantFrais);
     } break;
 
-    case 'getLesFraitForfait': {
+    case 'getLesFraisForfait': {
         $pdo->getFraisForfait();
     } break;
 

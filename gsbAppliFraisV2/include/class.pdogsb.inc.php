@@ -19,8 +19,8 @@
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbapplifrais';   		
-      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='adrian' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
 
@@ -349,10 +349,10 @@ class PdoGsb{
      * @return mixed L'id, le libelle et le montant sous la forme d'un tableau associatif
      */
     public function getFraisForfait() {
-        $req = "SELECT fraisforfait.id as id, fraisforfait.libelle as libelle, fraisforfait.montant as montant FROM fraisforfait;";
+        $req = "SELECT id, libelle, montant FROM fraisforfait;";
         $res = PdoGsb::$monPdo->query($req);
         $fraisForfait = $res->fetch();
-        return $fraisForfait;
+        return $res;
     }
 
     /**

@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Adrian Gandon
- * Date: 04/12/2016
- * Time: 18:07
- */
 include("vues/v_adminCRUD.php"); ?>
 <!doctype html>
 <html>
@@ -13,30 +7,26 @@ include("vues/v_adminCRUD.php"); ?>
         <div class="panel-heading">
             <div class="panel-title"><h2></h2></div>
             </br></br>
-            <legend>Les frais forfaitisé</legend>
+            <legend>Les frais forfaitisés</legend>
         </div>
-        <form method="post" action="index.php?uc=admin&action=getLesFraitForfait">
-        <p>
-            <label>Les données :</label><br/>
-            <label>ID : <?php
-                $leTab = $pdo->getFraisForfait(); // Le tableau qui est censé contenir touts frais forfait
-                /*echo $leTab[0];
-                echo $leTab[1];
-                echo $leTab[2];
-                echo "<br/>";*/
-                echo "<pre>"; // Mise en forme du "var_dump"
-                var_dump($leTab);
-                echo "</pre>";
-                ?></label><br/>
-            <label>Libelle :</label><br/>
-            <label>Montant :</label><br/>
+        <form method="post" action="index.php?uc=admin&action=getLesFraisForfait">
 
-        </p>
+            <?php
+            $reponse = $pdo->getFraisForfait();
+            while ($donnees = $reponse->fetch())
+            {
+            ?>
+            <p>
+                <strong>ID :</strong> <?php echo $donnees['id']; ?><br />
+                <strong>Libelle :</strong><?php echo $donnees['libelle']; ?><br />
+                <strong>Montant :</strong><?php echo $donnees['montant']; ?> <br />
+            </p>
+            <?php
+            }
+
+            $reponse->closeCursor();
+
+            ?>
+
     </div>
-</div
-
-<?php
-
-echo 'testicule';
-
-?>
+</div>
