@@ -5,18 +5,22 @@
             </br></br>
             <legend>Choisir une action</legend>
         </div>
-        <div class="panel-body">
-            <form class="form-horizontal" role="form" method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
-                <div class="form-group">
-                    <input class="btn btn-primary" id="create" type="submit" value="Créer" size="20" />
-                    <input class="btn btn-primary" id="read" type="submit" value="Voir" size="20" />
-                    <input class="btn btn-primary" id="update" type="submit" value="Mettre à jour" size="20" />
-                    <input class="btn btn-primary" id="delete" type="submit" value="Supprimer" size="20" />
+            <form method="post" action="index.php?uc=admin&action=selectionnerCRUD">
 
+                <p>
+                    <label for="pays">Faites votre choix</label><br />
+                    <select name="choixCRUD" id="CRUD">
+                        <option value="create">Créer</option>
+                        <option value="read">Voir</option>
+                        <option value="update">Mettre à jour</option>
+                        <option value="delete">Supprimer</option>
+                    </select>
+                </p>
 
+                <div class="form-horizontal">
+                    <input class="btn btn-primary" id="ok" type="submit" value="Valider" size="20"/>
                 </div>
 
-        </div>
-        </form>
-    </div>
+            </form>
+         </div>
 </div>
