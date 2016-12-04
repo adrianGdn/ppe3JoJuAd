@@ -5,7 +5,7 @@
             </br></br>
             <legend>Choisir une action</legend>
         </div>
-            <form method="post" action="index.php?uc=admin&action=selectionnerCRUD">
+            <form method="post" action="index.php?uc=admin&action=choixCRUD">
 
                 <p>
                     <label for="pays">Faites votre choix</label><br />
