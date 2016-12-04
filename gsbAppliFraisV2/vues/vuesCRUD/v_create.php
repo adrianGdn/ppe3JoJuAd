@@ -8,7 +8,7 @@ include("vues/v_adminCRUD.php");
             </br></br>
             <legend>Créer un frais forfaitisé</legend>
         </div>
-        <form method="post" action="include/class.pdogsb.inc.php">
+        <form method="post" action="index.php?uc=admin&action=ajoutFraisForfait">
 
             <p>
                 <label>Entrer les données</label><br />

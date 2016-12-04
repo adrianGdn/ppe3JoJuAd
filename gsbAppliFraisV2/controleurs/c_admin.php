@@ -6,6 +6,15 @@ switch($action){
         include("vues/v_adminCRUD.php");
 
     } break;
+
+    case 'ajoutFraisForfait': {
+        $idFrais = $_POST['ID'];
+        $libelleFrais = $_POST['libelle'];
+        $montantFrais = $_POST['montant'];
+        $pdo->addFraisForfait($idFrais, $libelleFrais, $montantFrais);
+
+    } break;
+
     case 'choixCRUD': {
         switch ($_POST['choixCRUD']) {
             case 'create': {
@@ -27,5 +36,6 @@ switch($action){
 
         }
         break;
+
     }
 }
