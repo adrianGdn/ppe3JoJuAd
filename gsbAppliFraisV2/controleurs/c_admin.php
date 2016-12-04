@@ -18,6 +18,14 @@ switch($action){
         $pdo->getFraisForfait();
     } break;
 
+    case 'updateFraisForfait': {
+        $idFrais = $_POST['ID'];
+        $libelleFrais = $_POST['libelle'];
+        $montantFrais = $_POST['montant'];
+        $idDepart = $_POST['IDdepart'];
+        $pdo->updateFraisForfait($idDepart ,$idFrais, $libelleFrais, $montantFrais);
+    } break;
+
 
     case 'choixCRUD': {
         switch ($_POST['choixCRUD']) {

@@ -8,7 +8,7 @@ include("vues/v_adminCRUD.php");
             </br></br>
             <legend>Mettre à jour un frais forfaitisé</legend>
         </div>
-        <form method="post" action="index.php?uc=admin&action=ajoutFraisForfait">
+        <form method="post" action="index.php?uc=admin&action=updateFraisForfait">
 
             <p>
                 <label>Entrer l'ID du frais à modifier</label><br />
