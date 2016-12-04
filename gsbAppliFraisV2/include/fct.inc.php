@@ -14,11 +14,13 @@ function estConnecte(){
  * @param $id int ID du visiteur
  * @param $nom string Nom du visiteur
  * @param $prenom string Prénom du visiteur
+ * @param $typeActeur int Type d'acteur
  */
-function connecter($id, $nom, $prenom){
+function connecter($id, $nom, $prenom, $typeActeur){
 	$_SESSION['idVisiteur']= $id; 
 	$_SESSION['nom']= $nom;
 	$_SESSION['prenom']= $prenom;
+	$_SESSION['typeActeur'] = $typeActeur;
 }
 
 /**
