@@ -27,14 +27,12 @@ switch($action){
 			$typeActeur = $visiteur['typeActeur'];
 			connecter($id, $nom, $prenom, $typeActeur);
 
-            if($pdo->testAdmin($id) == true)
+            if($typeActeur == "Administrateur")
                 include("vues/v_sommaireAdmin.php");
             else
                 include("vues/v_sommaire.php");
 
-			}
-
-			break;	
+        } break;
 	}
 	default :{
 		include("vues/v_connexion.php");

@@ -42,15 +42,9 @@
         <li class="active"><a href="index.php?uc=etatFrais&action=selectionnerMois">Mes fiches de frais</a></li>      
       </ul>
       <ul class="nav navbar-nav navbar-right">
-		  <li><a><?php echo $_SESSION['prenom']."  ".$_SESSION['nom']?></a></li>
+		  <li><a><?php echo $_SESSION['prenom']."  ".$_SESSION['nom']; ?></a></li>
 		  <li><a><?php
-                  if ($_SESSION['typeActeur'] == 2){
-                      echo 'Comptable';
-                  } else if ($_SESSION['typeActeur'] == 3){
-                      echo 'Administrateur';
-                  } else {
-                      echo 'Visiteur médical';
-                  }
+                  echo $_SESSION['typeActeur'];
                   ?></a></li>
         <li class="active"><a href="index.php?uc=connexion&action=deconnexion">Se déconnecter </a></li>
      </ul>

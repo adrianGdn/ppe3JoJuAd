@@ -58,8 +58,9 @@ class PdoGsb{
  * @return mixed l'id, le type, le nom, le prénom et le type d'acteur sous la forme d'un tableau associatif
 */
     public function getInfosActeur($login, $mdp){
-        $req = "select acteur.id as id, acteur.nom as nom, acteur.prenom as prenom, acteur.idTypeActeur as typeActeur from acteur 
-		where acteur.login='$login' and acteur.mdp='$mdp'";
+        $req = "SELECT acteur.id as id, acteur.nom as nom, acteur.prenom as prenom, typeacteur.leTypeActeur as typeActeur FROM acteur 
+		INNER JOIN typeacteur ON acteur.idTypeActeur = typeacteur.id
+		WHERE acteur.login='$login' AND acteur.mdp='$mdp'";
         $rs = PdoGsb::$monPdo->query($req);
         $ligne = $rs->fetch();
         return $ligne;
@@ -313,23 +314,6 @@ class PdoGsb{
 		where fichefrais.idvisiteur ='$idVisiteur' and fichefrais.mois = '$mois'";
 		PdoGsb::$monPdo->exec($req);
 	}
-
-    /**
-     * Permet de vérifier si l'acteur est un administrateur
-     *
-     * @param $idVisiteur int L'ID du type d'acteur qu'est le visiteur.
-     * @return bool Vrai ou faux
-     */
-    public function testAdmin($idVisiteur){
-        $req = "select acteur.idTypeActeur as type from acteur where acteur.id ='$idVisiteur'";
-        $res = PdoGsb::$monPdo->query($req);
-        $laLigne = $res->fetch();
-        $leType = $laLigne['type'];
-        if($leType == 3)
-            return true;
-        else
-            return false;
-    }
 
     /**
      * Permet l'ajout d'un frais forfait
