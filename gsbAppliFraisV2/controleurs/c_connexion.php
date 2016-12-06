@@ -6,24 +6,7 @@ if(!isset($_REQUEST['action'])){
 }
 $action = $_REQUEST['action'];
 switch($action){
-	case 'ajouterVisiteur':{
-		
-			$nom = $_REQUEST['nom'];
-			$prenom = $_REQUEST['prenom'];
-			$login = $_REQUEST['login'];
-			$mdp =  $_REQUEST['mdp'];
-			$type = $_REQUEST['type'];
-			$pdo->ajouterVisiteur($nom, $prenom, $login, $mdp, $type);
-			include('vues/v_redirection.php'); 
-		
-			
-	}
-		break;
-	
-	case 'creerCompte':{
-		include ("vues/v_inscription.php");
-		break;
-	}
+
 	case 'demandeConnexion':{
 		include("vues/v_connexion.php");
 		break;
