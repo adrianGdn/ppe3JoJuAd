@@ -19,8 +19,8 @@
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbapplifrais';   		
-      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $mdp='adrian' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
 
@@ -341,10 +341,10 @@ class PdoGsb{
     /**
      * Permet de mettre à jour un frais forfaitisé
      *
-     * @param $idFraisBase
-     * @param $idForfait
-     * @param $libelleForfait
-     * @param $montantForfait
+     * @param $idFraisBase mixed L'ID du frais de base
+     * @param $idForfait mixed L'ID du frais forfait
+     * @param $libelleForfait mixed Le libelle du frais forfait
+     * @param $montantForfait mixed Le montant du frais forfait
      */
     public function updateFraisForfait($idFraisBase, $idForfait, $libelleForfait, $montantForfait){
         $req = "update fraisforfait set id = '$idForfait', libelle = '$libelleForfait', montant = '$montantForfait'  
