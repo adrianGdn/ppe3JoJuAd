@@ -172,9 +172,8 @@ function valideInfosFrais($dateFrais,$libelle,$montant){
 	}
 	if($montant == ""){
 		ajouterErreur("Le champ montant ne peut pas être vide");
-	}
-	else
-		if( !is_numeric($montant) ){
+	} else
+		if(!is_numeric($montant) ){
 			ajouterErreur("Le champ montant doit être numérique");
 		}
 }
@@ -205,3 +204,4 @@ function nbErreurs(){
 	}
 }
 ?>
+

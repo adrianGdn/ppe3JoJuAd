@@ -5,32 +5,36 @@
 		</div>
 		<div class="panel-body">
 			<table class="table">
-			  <thead>
-				<tr>
-					<th class="date">Date</th>
-					<th class="libelle">Libellé</th>  
-					<th class="montant">Montant</th>  
-					<th class="action">&nbsp;</th>              
-				 </tr>
-				 <?php    
+			     <thead>
+                    <tr>
+                        <th class="date">Date</th>
+                        <th class="libelle">Libellé</th>
+                        <th class="montant">Montant</th>
+                        <th class="action">&nbsp;</th>
+                    </tr>
+				    <?php
 
-					foreach( $lesFraisHorsForfait as $unFraisHorsForfait) 
-					{
-						$libelle = $unFraisHorsForfait['libelle'];
-						$date = $unFraisHorsForfait['date'];
-						$montant=$unFraisHorsForfait['montant'];
-						$id = $unFraisHorsForfait['id']
-						
-				?>		
-						<tr>
+					    foreach( $lesFraisHorsForfait as $unFraisHorsForfait)
+                        {
+                            $libelle = $unFraisHorsForfait['libelle'];
+                            $date = $unFraisHorsForfait['date'];
+                            $montant = $unFraisHorsForfait['montant'];
+                            $id = $unFraisHorsForfait['id'];
+
+                    ?>
+                            <tr>
 							<td> <?php echo $date ?></td>
 							<td><?php echo $libelle ?></td>
 							<td><?php echo $montant ?></td>
-							<td> <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo '<a></a>';}
-								else {
+							<td> <?php
+                            if ($_SESSION['infoFicheFrais']['idEtat']!='CR')
+							{
+							    echo htmlspecialchars('Voulez-vous vraiment supprimer ce frais ?', ENT_QUOTES);
+                            } else {
+                                    echo htmlspecialchars('Voulez-vous vraiment supprimer ce frais ?', ENT_QUOTES);
 									echo '<a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais='.$id.'"
-								onclick="return confirm(\'Voulez-vous vraiment supprimer ce frais?\');">Supprimer ce frais</a></td>';
-								}
+								onclick="return confirm(\'Voulez-vous vraiment supprimer ce frais ?\');"> Supprimer ce frais</a></td>';
+								    }
 						?></tr><?php		 }  ?>	  
 			 </table>
 		</div> 
@@ -38,8 +42,7 @@
 </div>
 
 
-    
-                            
+
 <div class="col-md-6">
 	<div class="content-box-large">
 		<div class="panel-heading">
@@ -65,17 +68,9 @@
 				</div>
 			<div class="horizontal-form">
 				<input class="btn btn-primary" id="ajouter" type="submit" value="Ajouter" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?> />
-				<input class="btn btn-primary" id="effacer" type="reset" value="Effacer" />
-      
-			</div>
-        
+				<input class="btn btn-primary" id="effacer" type="reset" value="Effacer"/>>
+            </div>
 			</form>
-							
 		</div>
 	</div>
 </div>
-
-
-
-  
-

@@ -1,6 +1,5 @@
 <?php
 
-
 include("vues/v_sommaire.php");
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date("d/m/Y"));
@@ -21,7 +20,7 @@ switch($action){
 	  	 	$pdo->majFraisForfait($idVisiteur,$mois,$lesFrais);
 		}
 		else{
-			ajouterErreur("Les valeurs des frais doivent �tre num�riques");
+			ajouterErreur("Les valeurs des frais doivent être numériques");
 			include("vues/v_erreurs.php");
 		}
 	  break;
@@ -48,7 +47,7 @@ switch($action){
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
 $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$mois);
+$_SESSION['infoFicheFrais'] = $lesInfosFicheFrais;
 include("vues/v_listeFraisForfait.php");
 include("vues/v_listeFraisHorsForfait.php");
-
 ?>
