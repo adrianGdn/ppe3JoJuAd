@@ -27,7 +27,7 @@
 							<td><?php echo $libelle ?></td>
 							<td><?php echo $montant ?></td>
 							<td> <?php
-                            if ($_SESSION['infoFicheFrais']['idEtat']!='CR')
+                            if ($lesInfosFicheFrais['idEtat']!='CR')
 							{
 							    echo htmlspecialchars('Voulez-vous vraiment supprimer ce frais ?', ENT_QUOTES);
                             } else {
@@ -68,7 +68,7 @@
 				</div>
 			<div class="horizontal-form">
 				<input class="btn btn-primary" id="ajouter" type="submit" value="Ajouter" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?> />
-				<input class="btn btn-primary" id="effacer" type="reset" value="Effacer"/>>
+				<input class="btn btn-primary" id="effacer" type="reset" value="Effacer"/>
             </div>
 			</form>
 		</div>
