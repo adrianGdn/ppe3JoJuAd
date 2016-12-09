@@ -1,5 +1,4 @@
-﻿
-<?php
+﻿<?php
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
 session_start();
@@ -7,7 +6,7 @@ $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
 if(!isset($_REQUEST['uc']) || !$estConnecte){
      $_REQUEST['uc'] = 'connexion';
-}	 
+}
 $uc = $_REQUEST['uc'];
 switch($uc){
 	case 'connexion':{
@@ -22,18 +21,5 @@ switch($uc){
 	case 'admin' :{
 		include("controleurs/c_admin.php");break;
 	}
-	
-	
-	}
-	
-	
-
-
+}
 ?>
-
-
-
-
-
-
-

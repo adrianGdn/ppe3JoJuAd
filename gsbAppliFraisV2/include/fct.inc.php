@@ -76,7 +76,6 @@ function getMois($date){
 */
 function estEntierPositif($valeur) {
 	return preg_match("/[^0-9]/", $valeur) == 0;
-	
 }
 
 /**
@@ -111,6 +110,7 @@ function estDateDepassee($dateTestee){
 	@list($jourTeste,$moisTeste,$anneeTeste) = explode('/',$dateTestee);
 	return ($anneeTeste.$moisTeste.$jourTeste < $AnPasse); 
 }
+
 /**
  * Vérifie la validité du format d'une date Française (jj/mm/aaaa)
  *
@@ -145,6 +145,7 @@ function estDateValide($date){
 function lesQteFraisValides($lesFrais){
 	return estTableauEntiers($lesFrais);
 }
+
 /**
  * Vérifie la validité des trois arguments : la date, le libellé du frais et le montant,
  * des message d'erreurs sont ajoutés au tableau des erreurs
@@ -191,8 +192,8 @@ function ajouterErreur($msg){
 }
 
 /**
- * Retoune le nombre de lignes du tableau des erreurs 
- 
+ * Retoune le nombre de lignes du tableau des erreurs
+ *
  * @return int Le nombre d'erreurs
  */
 function nbErreurs(){
@@ -203,5 +204,28 @@ function nbErreurs(){
 	   return count($_REQUEST['erreurs']);
 	}
 }
-?>
 
+/**
+ * Permet d'obtenir le mois désiré sous la forme d'une chaîne de caractères
+ *
+ * @param $numMois string Le numéro du mois désiré, sous forme d'entier
+ * @return string Le mois (sous forme de chaîne de caractères)
+ */
+function getNomMois($numMois){
+    $nomMois = array(
+        '01' => "Janvier",
+        '02' => "Février",
+        '03' => "Mars",
+        '04' => "Avril",
+        '05' => "Mai",
+        '06' => "Juin",
+        '07' => "Juillet",
+        '08'=> "Août",
+        '09' => "Septembre",
+        '10' => "Octobre",
+        '11' => "Novembre",
+        '12' => "Décembre"
+    );
+    return $nomMois[$numMois];
+}
+?>

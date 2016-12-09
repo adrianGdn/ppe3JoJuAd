@@ -13,14 +13,12 @@
                         <th class="action">&nbsp;</th>
                     </tr>
 				    <?php
-
 					    foreach( $lesFraisHorsForfait as $unFraisHorsForfait)
                         {
                             $libelle = $unFraisHorsForfait['libelle'];
                             $date = $unFraisHorsForfait['date'];
                             $montant = $unFraisHorsForfait['montant'];
                             $id = $unFraisHorsForfait['id'];
-
                     ?>
                             <tr>
 							<td> <?php echo $date ?></td>
@@ -40,8 +38,6 @@
 		</div> 
 	</div>
 </div>
-
-
 
 <div class="col-md-6">
 	<div class="content-box-large">
