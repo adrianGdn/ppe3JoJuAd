@@ -17,7 +17,7 @@ include("vues/v_adminCRUD.php");
                 <label>Libelle :</label>
                 <input type="text" name="libelle" id="libelle" placeholder="Ex : Nuit à l'hôtel" required/><br />
                 <label>Montant :</label>
-                <input type="number" name="montant" id="montant" placeholder="Ex : 23.42" required/><br />
+                <input type="number" step="any" name="montant" id="montant" placeholder="Ex : 23.42" required/><br />
 
             </p>
 
