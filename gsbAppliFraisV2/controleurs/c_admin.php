@@ -32,6 +32,8 @@ switch($action){
     } break;
 
 
+    // Ce case permet de choisir une vue du CRUD à appeler, les includes sont séparés du reste
+    // pour éviter car elles ne doivent qu'appeler des vues et rien exécuter d'autre.
     case 'choixCRUD': {
         switch ($_POST['choixCRUD']) {
             case 'create': {
