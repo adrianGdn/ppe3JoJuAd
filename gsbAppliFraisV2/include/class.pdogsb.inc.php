@@ -19,8 +19,8 @@
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbapplifrais';   		
-      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $mdp='adrian' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
 
@@ -275,9 +275,6 @@ class PdoGsb{
 			$mois = $laLigne['mois'];
 			$numAnnee = substr($mois, 0, 4);
 			$numMois = substr($mois, 4, 2);
-
-            //$numMois = getNomMois(substr(2, 4, 2));
-
 			$lesMois["$mois"]=array(
 		    "mois" => "$mois",
 		    "numAnnee" => "$numAnnee",

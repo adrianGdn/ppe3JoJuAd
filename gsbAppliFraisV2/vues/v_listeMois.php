@@ -12,15 +12,18 @@
                             {
                                 $mois = $unMois['mois'];
                                 $numAnnee = $unMois['numAnnee'];
-                                $numMois = $unMois['numMois'];
+                                //$numMois = $unMois['numMois'];
+
+                                $numMois = getNomMois($unMois['numMois']); // On récupère le num du mois et on le remplace par son équivalent en String
+
                                 $nomMois = $unMois['nomMois'];
                                 if($mois == $moisASelectionner){
                         ?>
-                            <option selected value="<?php echo $mois ?>"><?php echo  $numMois."/".$numAnnee ?> </option>
+                            <option selected value="<?php echo $mois ?>"><?php echo  $numMois." ".$numAnnee ?> </option>
                                 <?php
                                 }
                                 else{ ?>
-                            <option value="<?php echo $mois ?>"><?php echo  $numMois."/".$numAnnee ?> </option>
+                            <option value="<?php echo $mois ?>"><?php echo  $numMois." ".$numAnnee ?> </option>
                                 <?php
                                 }
                             }
