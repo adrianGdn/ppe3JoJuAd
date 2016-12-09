@@ -1,5 +1,5 @@
 ﻿<?php
-if($_SESSION['typeActeur'] = 'Administrateur') {
+if($_SESSION['typeActeur'] == 'Administrateur') {
     include("vues/v_sommaireAdmin.php");
 }
 else {

@@ -1,6 +1,5 @@
 <?php
-
-if($_SESSION['typeActeur'] = 'Administrateur') {
+if($_SESSION['typeActeur'] == 'Administrateur') {
     include("vues/v_sommaireAdmin.php");
 }
 else {
@@ -29,30 +28,10 @@ switch($action){
 			include("vues/v_erreurs.php");
 		} break;
 	}
-
-	case 'validerCreationFrais':{
-		$dateFrais = $_REQUEST['dateFrais'];
-		$libelle = $_REQUEST['libelle'];
-		$montant = $_REQUEST['montant'];
-		valideInfosFrais($dateFrais,$libelle,$montant);
-		if (nbErreurs() != 0 ){
-			include("vues/v_erreurs.php");
-		}
-		else{
-			$pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);
-		} break;
-	}
-
-	case 'supprimerFrais':{
-		$idFrais = $_REQUEST['idFrais'];
-	    $pdo->supprimerFraisHorsForfait($idFrais);
-		break;
-	}
 }
 
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
 $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$mois);
 include("vues/v_listeFraisForfait.php");
-include("vues/v_listeFraisHorsForfait.php");
 ?>
