@@ -1,6 +1,11 @@
 <?php
 
-include("vues/v_sommaire.php");
+if($_SESSION['typeActeur'] = 'Administrateur') {
+    include("vues/v_sommaireAdmin.php");
+}
+else {
+    include("vues/v_sommaire.php");
+}
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date("d/m/Y"));
 $numAnnee = substr($mois, 0, 4);

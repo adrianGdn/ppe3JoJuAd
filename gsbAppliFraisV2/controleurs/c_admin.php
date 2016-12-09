@@ -1,5 +1,10 @@
 <?php
-include("vues/v_sommaireAdmin.php");
+if($_SESSION['typeActeur'] = 'Administrateur') {
+    include("vues/v_sommaireAdmin.php");
+}
+else {
+    include("vues/v_sommaire.php");
+}
 $action = $_REQUEST['action'];
 switch($action){
     case 'selectionnerCRUD': {
@@ -32,8 +37,6 @@ switch($action){
     } break;
 
 
-    // Ce case permet de choisir une vue du CRUD à appeler, les includes sont séparés du reste
-    // pour éviter car elles ne doivent qu'appeler des vues et rien exécuter d'autre.
     case 'choixCRUD': {
         switch ($_POST['choixCRUD']) {
             case 'create': {
