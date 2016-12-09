@@ -5,23 +5,21 @@
             </br></br>
             <legend>Choisir une action</legend>
         </div>
-            <form method="post" action="index.php?uc=admin&action=choixCRUD">
 
-                <p>
-                    <label for="pays">Faites votre choix</label><br />
-                    <select name="choixCRUD" id="CRUD">
-                        <option value="create">Créer</option>
-                        <option value="read">Voir</option>
-                        <option value="update">Mettre à jour</option>
-                        <option value="delete">Supprimer</option>
+        <form method="post" action="index.php?uc=admin&action=choixCRUD">
+        <p>
+            <label for="pays">Faites votre choix</label><br />
+            <select name="choixCRUD" id="CRUD">
+                <option value="create">Créer</option>
+                <option value="read">Voir</option>
+                <option value="update">Mettre à jour</option>
+                <option value="delete">Supprimer</option>
+            </select>
+        </p>
 
-                    </select>
-                </p>
-
-                <div class="form-horizontal">
-                    <input class="btn btn-primary" id="ok" type="submit" value="Valider" size="20"/>
-                </div>
-
-            </form>
-         </div>
+        <div class="form-horizontal">
+            <input class="btn btn-primary" id="ok" type="submit" value="Valider" size="20"/>
+        </div>
+        </form>
+    </div>
 </div>
