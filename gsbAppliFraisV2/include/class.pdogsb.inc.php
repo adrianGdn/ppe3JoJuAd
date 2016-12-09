@@ -337,7 +337,8 @@ class PdoGsb{
     public function getFraisForfait() {
         $req = "SELECT id, libelle, montant FROM fraisforfait;";
         $res = PdoGsb::$monPdo->query($req);
-        return $res;
+        $lesDonnees = $res->fetchALl();
+        return $lesDonnees;
     }
 
     /**

@@ -13,7 +13,7 @@ include("vues/v_adminCRUD.php"); ?>
 
             <?php
             $reponse = $pdo->getFraisForfait();
-            while ($donnees = $reponse->fetch())
+            foreach ($reponse as $donnees)
             {
             ?>
             <p>
@@ -23,8 +23,6 @@ include("vues/v_adminCRUD.php"); ?>
             </p>
             <?php
             }
-
-            $reponse->closeCursor();
 
             ?>
 
