@@ -29,6 +29,7 @@ function connecter($id, $nom, $prenom, $typeActeur){
 function deconnecter(){
     session_destroy();
 }
+
 /**
  * Transforme une date au format Français (jj/mm/aaaa) vers le format Anglais (aaaa-mm-jj)
  *
@@ -226,24 +227,5 @@ function getNomMois($numMois){
         '12' => "Décembre"
     );
     return $nomMois[$numMois];
-}
-
-function donneIdFrais($type) {
-    $idFrais = "";
-    switch ($type) {
-        case ("Forfait Etape") :
-            $idFrais = "ETP";
-            break;
-        case ("Frais Kilométrique") :
-            $idFrais = "KM";
-            break;
-        case ("Nuitée Hôtel") :
-            $idFrais = "NUI";
-            break;
-        case ("Repas Restaurant") :
-            $idFrais = "REP";
-            break;
-    }
-    return $idFrais;
 }
 ?>

@@ -3,61 +3,15 @@
 		<div class="panel-heading">
 			<div class="panel-title"><h2></h2></div>
 			</br></br>
-            <p> Renseigner la fiche du mois de :
-                <select method="POST" name="fromSelectMois">
-                    <option value="Janvier">Janvier</option>
-                    <option value="Fevrier">Fevrier</option>
-                    <option value="Mars">Mars</option>
-                    <option value="Avril">Avril</option>
-                    <option value="Mais">Mai</option>
-                    <option value="Juin">Juillet</option>
-                    <option value="Aout">Aout</option>
-                    <option value="Septembre">Septembre</option>
-                    <option value="Octobre">Octobre</option>
-                    <option value="Novembre">Novembre</option>
-                    <option value="Decembre">Decembre</option>
-                </select>
-            </p>
+		    <legend>Eléments forfaitisés</legend>
 		</div>
-
-        <div class="panel-body">
-
-            <!-- le formulaire pass les informations entrées au controleur -->
-
-            <form class="form-horizontal" role="form" method="POST"  action="index.php?uc=gererFrais&action=validerCreationFrais">
-                <label>Saisie d'un nouveau frais forfaitisé :</label><br/>
-
-                <!-- passe la valeur sélectionnée dans le drop down au controleur gererFrais-->
-                <label>Type de frais :</label>
-                <select name="libelle" id="typeFrais"><option selected="choix-Option"> Choisissez un type de frais
-                        <!-- pour chaque $libelle stockés dans le tableau $lesFraisForfait
-                         afficher le libelle dans le drop-down -->
-                        <?php foreach ($lesLibellesForfait as $libelleFrais)
-                        { ?>
-                    <option>
-                        <?php echo $libelleFrais['libelle'] ?>
-                    </option>
-                    <?php
-                        }
-                        ?>
-                </select> <br/>
-
-                <label>Date de l'engagement de la dépense :</label>
-                    <input type="date" name="dateAjout" value="<?php echo date('Y-m-d'); ?>" />
-            <br/>
-            <label>Description :</label> <input name="description" type="text"><br/>
-            <label>Quantité :</label> <input name="quantite" type="number"><br/>
-
-                <!-- Bouton de Validation -->
-                <input class="btn btn-primary" id="ok" type="submit" value="Valider" size="20" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?>/> <br/>
-            </form>
-        </div>
-
-        <!-- Generation du tableau -->
 		<div class="panel-body">
+<<<<<<< HEAD
 
             <label name="lblElemForf">Eléments forfaitisés (synthèse du mois)</label><br/>
 
+=======
+>>>>>>> origin/gsbAppliFrais-2.1.2
 			<form class="form-horizontal" role="form" method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
 
 			    <div class="form-group">
@@ -65,6 +19,7 @@
                     <table>
                         <thead>
                     <?php
+<<<<<<< HEAD
                         foreach ($lesFraisForfait as $unFrais) { //récupère libelle/quantite de chaque frais et stocke dans $libelle et $quantite
                             echo'<td>',$unFrais['libelle'],'</td>';
                         }
@@ -79,13 +34,23 @@
 
                     <input class="btn btn-primary" id="ok" type="submit" value="Valider" size="20" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?>/>
 
+=======
+                        foreach ($lesFraisForfait as $unFrais)
+                        {
+                            $idFrais = $unFrais['idfrais'];
+                            $libelle = $unFrais['libelle'];
+                            $quantite = $unFrais['quantite'];
+                    ?>
+>>>>>>> origin/gsbAppliFrais-2.1.2
                     <div class="form-group">
-
-
-
-
+					    <label for="idFrais"><?php echo $libelle ?></label>
+					    <input class="form-control" placeholder="<?php echo $quantite?>" type="text" id="idFrais" name="lesFrais[<?php echo $idFrais?>]""<?php echo $quantite?>"<?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?> />
+					</div>
+					<?php
+						}
+					?>
 				</div>
-
+				<input class="btn btn-primary" id="ok" type="submit" value="Valider" size="20" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?>/>
             </form>
         </div>
     </div>
