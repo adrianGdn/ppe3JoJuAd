@@ -117,10 +117,10 @@ class PdoGsb{
 		lignefraisforfait.quantite as quantite from lignefraisforfait inner join fraisforfait 
 		on fraisforfait.id = lignefraisforfait.idfraisforfait
 		where lignefraisforfait.idvisiteur ='$idVisiteur' and lignefraisforfait.mois='$mois' 
-		order by lignefraisforfait.idfraisforfait";	
+		order by lignefraisforfait.idfraisforfait";
 		$res = PdoGsb::$monPdo->query($req);
 		$lesLignes = $res->fetchAll();
-		return $lesLignes; 
+		return $lesLignes;
 	}
 
 	public function getLibelleForfait(){

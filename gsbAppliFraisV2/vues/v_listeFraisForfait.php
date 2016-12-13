@@ -55,62 +55,27 @@
 
         <!-- Generation du tableau -->
 		<div class="panel-body">
+
             <label name="lblElemForf">Eléments forfaitisés (synthèse du mois)</label><br/>
+
 			<form class="form-horizontal" role="form" method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
+
 			    <div class="form-group">
+
+                    <table>
+                        <thead>
                     <?php
-                    var_dump($lesFraisForfait);
-                        foreach ($lesFraisForfait as $unFrais) {
-                            $idFrais = $unFrais['idfrais'];
-                            $libelle = $unFrais['libelle'];
-                            $quantite = $unFrais['quantite'];
-                            //$montantTotal = $unFrais['MontantTotal']
+                        foreach ($lesFraisForfait as $unFrais) { //récupère libelle/quantite de chaque frais et stocke dans $libelle et $quantite
+                            echo'<td>',$unFrais['libelle'],'</td>';
                         }
-
                     ?>
-
-                    <table class="tableau">
-                        <thead>
-                        <tr><?php
-                            foreach ($lesLibellesForfait as $unLibelleFrais) {
-                                echo '<th>';
-                                echo $unLibelleFrais['libelle'];
-                                echo '</th>';
-                            }
-                            ?>
-                            <t</tr>
                         </thead>
-                        <tbody>
-                        <tr><td>Quantité Totale</td><td><?=implode("</td><td>",array_column($lesFraisForfait, "idfrais"))?></td></tr>
-                        <tr><td>Montant Total</td><td><?=implode("</td><td>",array_column($lesFraisForfait, "quantite"))?></td></tr>
-                        </tbody>
                     </table>
-
-                    <label>Total des frais forfaitisés engagés pour le mois : <?php echo " " ?></label> <br/>
-
-                    <label>Elements forfaitisés (détails du mois) :</label> <br/>
-                    <?php ?>
-                    <table class="tableau">
-                        <thead>
-                        <tr>
-                            <td>Date</td>
-                            <td>Type frais</td>
-                            <td>Description</td>
-                            <td>Quantité</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                      <!--  <tr><td><?=implode("</td><td>",array_column($lesInfosFicheFrais,"dateModif"))?></td></tr> trouver pourquoi ne fonctionne pas -->
-                        <tr>
-                            <td><?php echo $lesInfosFicheFrais[1] ?></td>
-                            <td><?php echo $libelle ?></td>
-                            <td><?php echo " " ?></td>
-                            <td><?php echo $quantite ?></td>
-                        </tr>
-
-                        </tbody>
-                    </table>
+                    <label>Total des frais forfaitisés engagés pour le mois : <?php echo " " ?>
+                    </label>
                     <br/>
+
+
 
                     <input class="btn btn-primary" id="ok" type="submit" value="Valider" size="20" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?>/>
 
