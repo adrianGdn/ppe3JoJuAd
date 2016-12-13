@@ -33,6 +33,7 @@
                                 </br>
                                 <input type="submit" class="btn btn-primary signup" value="Login">
                             </form>
+                                <a href="../redirectionMDP/changerMDP.php"> Mot de passe oublié </a>
                             </br>
                             </div>
                         </div>
