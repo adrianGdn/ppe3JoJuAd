@@ -18,9 +18,9 @@
 
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=dbgsb';
-      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $bdd='dbname=gsbapplifrais';   		
+      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $mdp='adrian' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
 
@@ -122,13 +122,6 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes; 
 	}
-
-	public function getLibelleForfait(){
-		$req = "select libelle from fraisforfait";
-        $res = PdoGsb::$monPdo->query($req);
-        $lesLignes = $res->fetchAll();
-        return $lesLignes;
-    }
 
 	/**
 	 * Retourne tous les ID de la table FraisForfait
@@ -325,10 +318,8 @@ class PdoGsb{
      * @param $libelleForfait String Le libelle du frais forfait
      * @param $montantForfait Float(5,2) Le montant du frais forfait
      */
-    public function addNouveauFraisForfait($idVisiteur,$mois,$libelle,$description,$date,$quantite,$idFraisForfait){
-        $quantite = (int)$quantite;
-        $dateFr = dateFrancaisVersAnglais($date);
-        $req = "insert into lignefraisforfait (idvisiteur,mois,idfraisforfait,quantite,montant,dateFrais,libelle,description) values('$idVisiteur','$mois','$idFraisForfait',$quantite,0.00,'$dateFr','$libelle','$description');";
+    public function addFraisForfait($idForfait, $libelleForfait, $montantForfait) {
+        $req = "INSERT INTO fraisforfait(id, libelle, montant) VALUES ('$idForfait','$libelleForfait','$montantForfait')";
         PdoGsb::$monPdo->exec($req);
     }
 

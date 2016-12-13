@@ -21,45 +21,34 @@
 		</div>
 
         <div class="panel-body">
-
-            <!-- le formulaire pass les informations entrées au controleur -->
-
-            <form class="form-horizontal" role="form" method="POST"  action="index.php?uc=gererFrais&action=validerCreationFrais">
+            <form class="form-horizontal" role="form" method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
                 <label>Saisie d'un nouveau frais forfaitisé :</label><br/>
-
-                <!-- passe la valeur sélectionnée dans le drop down au controleur gererFrais-->
                 <label>Type de frais :</label>
-                <select name="libelle" id="typeFrais"><option selected="choix-Option"> Choisissez un type de frais
-                        <!-- pour chaque $libelle stockés dans le tableau $lesFraisForfait
-                         afficher le libelle dans le drop-down -->
-                        <?php foreach ($lesLibellesForfait as $libelleFrais)
+                <select method="POST" name="lstFrais" id="typeFrais"><option selected="choix-Option"> Choisissez un type de frais
+                        <?php foreach ($lesFraisForfait as $libelleFrais)
                         { ?>
-                    <option>
-                        <?php echo $libelleFrais['libelle'] ?>
-                    </option>
+                    <option value="<? echo $libelleFrais['libelle']?>"><?php echo $libelleFrais['libelle'] ?></option>
                     <?php
                         }
                         ?>
                 </select> <br/>
 
                 <label>Date de l'engagement de la dépense :</label>
+                <form name="Filter" method="POST">
                     <input type="date" name="dateAjout" value="<?php echo date('Y-m-d'); ?>" />
+            </form>
             <br/>
-            <label>Description :</label> <input name="description" type="text"><br/>
-            <label>Quantité :</label> <input name="quantite" type="number"><br/>
-
-                <!-- Bouton de Validation -->
+            <label>Description :</label> <input method="POST" name="descriptionInput" type="text"><br/>
+            <label>Quantité :</label> <input method="POST" name="quantitéInput" type="number"><br/>
                 <input class="btn btn-primary" id="ok" type="submit" value="Valider" size="20" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?>/> <br/>
             </form>
         </div>
 
-        <!-- Generation du tableau -->
 		<div class="panel-body">
             <label name="lblElemForf">Eléments forfaitisés (synthèse du mois)</label><br/>
 			<form class="form-horizontal" role="form" method="POST"  action="index.php?uc=gererFrais&action=validerMajFraisForfait">
 			    <div class="form-group">
                     <?php
-                    var_dump($lesFraisForfait);
                         foreach ($lesFraisForfait as $unFrais) {
                             $idFrais = $unFrais['idfrais'];
                             $libelle = $unFrais['libelle'];
@@ -71,14 +60,7 @@
 
                     <table class="tableau">
                         <thead>
-                        <tr><?php
-                            foreach ($lesLibellesForfait as $unLibelleFrais) {
-                                echo '<th>';
-                                echo $unLibelleFrais['libelle'];
-                                echo '</th>';
-                            }
-                            ?>
-                            <t</tr>
+                        <tr><td><?php echo "  ";?></td><td><?=implode("</td><td>",array_column($lesFraisForfait, "libelle"))?></td></tr>
                         </thead>
                         <tbody>
                         <tr><td>Quantité Totale</td><td><?=implode("</td><td>",array_column($lesFraisForfait, "idfrais"))?></td></tr>
@@ -116,8 +98,13 @@
 
                     <div class="form-group">
 
+					   <!-- <label for="idFrais"><?php echo $libelle ?></label> -->
 
+					    <input class="form-control" placeholder="<?php echo $quantite?>" type="text" id="idFrais" name="lesFrais[<?php echo $idFrais?>]""<?php echo $quantite?>"<?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?> />
+					</div>
+					<?php
 
+					?>
 
 				</div>
 
