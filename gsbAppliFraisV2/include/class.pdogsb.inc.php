@@ -358,5 +358,13 @@ class PdoGsb{
         $req = "DELETE FROM fraisforfait WHERE fraisforfait.id = '$id'";
         PdoGsb::$monPdo->exec($req);
     }
+
+    /**
+     * Permet de récupérer les cabinets
+     */
+    public function getLesCabinets() {
+        $req = "SELECT * FROM cabinet";
+        PdoGsb::$monPdo->exec($req);
+    }
 }
 ?>
