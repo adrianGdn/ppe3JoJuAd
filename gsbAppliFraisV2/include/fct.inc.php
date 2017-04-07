@@ -228,4 +228,10 @@ function getNomMois($numMois){
     );
     return $nomMois[$numMois];
 }
+
+function envoieUnMail($adresseMail){
+	$sujet = "Lien de réinitialisation de votre mot de passe";
+	$message = "Bonjour Madame, Monsieurs, \n \n Le lien de réinitialisation de votre mot de passe est le suivant : \n liensBlop \n \n Cordialement,\n L'équipe GSB.";
+	mail($adresseMail, $sujet, $message);
+}
 ?>

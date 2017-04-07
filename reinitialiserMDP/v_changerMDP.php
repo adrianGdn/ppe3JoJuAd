@@ -6,27 +6,17 @@ session_start();
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
 
-
-// Utiliser sendmail et fonction mail() pour envoyer un mail à l'utilisateur lors de l'envoie du mail
-// Comprendre pour redirection WTF lors du clic sur le bouton
 ?>
 
+<!-- Permet de "communiquer" avec l'utilisateur -->
 <script type="text/javascript">
     function verifieChamp()
     {
-        if (document.getElementById("login").value != "")
+        if (document.getElementById("leLogin").value == "")
         {
-            alert("Un mail pour réinitialiser votre mot de passe a été envoyé.");
-            // Gérer l'envoi de mail
+            alert("Vous devez saisir un login.");
         }
-        else
-            alert("Veuillez saisir un login valide.");
     }
-
-    /*function envoiMail()
-    {
-        alert("dfdfdfdfdf");
-    }*/
 </script>
 
 <!DOCTYPE html>
@@ -55,10 +45,11 @@ $estConnecte = estConnecte();
                         <div class="box">
                             <div class="content-wrap">
                                 <legend>Saissisez votre login</legend>
-                                <form method="post" action="index.php?uc=connexion&action=valideConnexion">
-                                    <input name="login" id="login" class="form-control" type="text" placeholder="Login">
+                                <!-- On indique l'action qui doit suivre l'action de cliquer sur le bouton -->
+                                <form method="post" action="../gsbAppliFraisV2/index.php?uc=connexion&action=changerMDP" role='form'>
+                                    <input name="leLogin" id="leLogin" class="form-control" type="text" placeholder="Votre login">
                                     </br>
-                                    <input type="button" class="btn btn-primary" name="reinitialisationMDP" value="Réinitialiser le mot de passe" onclick="verifieChamp()">
+                                    <input type="submit" class="btn btn-primary" name="reinitialisationMDP" value="Réinitialiser votre mot de passe" ><!--onclick="verifieChamp()"-->
                                     </br>
                                 </form>
                             </div>
@@ -71,7 +62,7 @@ $estConnecte = estConnecte();
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://code.jquery.com/jquery.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script src="js/custom.js"></script>
+        <script src="../gsbAppliFraisV2/bootstrap/js/bootstrap.min.js"></script>
+        <script src="../gsbAppliFraisV2/js/custom.js"></script>
     </body>
 </html>

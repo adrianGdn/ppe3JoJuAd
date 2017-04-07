@@ -19,8 +19,8 @@
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
       	private static $bdd='dbname=gsbapplifrais';
-      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='adrian' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
 
@@ -53,8 +53,8 @@ class PdoGsb{
 	/**
 	 * Retourne les informations d'un acteur
 	 *
-	 * @param $login
-	 * @param $mdp
+	 * @param $login string Le login de l'acteur
+	 * @param $mdp string Le mot de passe de l'acteur
 	 * @return mixed l'id, le nom, le prénom et le type d'acteur sous la forme d'un tableau associatif
 	*/
     public function getInfosActeur($login, $mdp){
@@ -182,11 +182,25 @@ class PdoGsb{
      *
      * @return mixed L'id, le libelle et le montant sous la forme d'un tableau associatif
      */
-    public function getFraisForfait() {
+    public function getFraisForfait(){
         $req = "SELECT id, libelle, montant FROM fraisforfait;";
         $res = PdoGsb::$monPdo->query($req);
         $lesDonnees = $res->fetchALl();
         return $lesDonnees;
+    }
+
+    /**
+     * Permet de récupérer l'adresse mail de l'utilisateur qui a oublié son mot de passe,
+     * si le login saisi est correct
+     *
+     * @param $login string Le login de l'utilisateur qui a oublié son mot de passe
+     * @return $leMailActeur mixed L'adresse mail de l'utilisateur qui a oublié son mot de passe
+     */
+    public function getActeurSelonLogin($login){
+        $req = "SELECT mail FROM acteur WHERE login='$login'";
+        $res = PdoGsb::$monPdo->query($req);
+        $leMailActeur = $res->fetchAll();
+        return $leMailActeur;
     }
 
     /**
@@ -196,24 +210,23 @@ class PdoGsb{
      * @param $mdp string Le mot de passe du visiteur
      * @return $lesVisiteurs mixed Les attributs de la table visiteur sous forme d'un tableau associatif
      */
-    public function getLeVisiteur($login,$mdp)
-        {   // Création de la requête (sélectionne un visiteur en fction du login/mdp et de son id = 2 (visiteur)
-            $req = "SELECT * from acteur WHERE acteur.idTypeActeur = '2'AND WHERE acteur.login='$login' AND WHERE acteur.mdp='$mdp'";
-            // Exécution de la requête
-            $res = PdoGsb::$monPdo->query($req);
-            // Stockage de la requête dans $lesVisiteurs
-            $lesVisiteurs = $res->fetchAll();
-            // Retourne $lesVisiteurs
-            return $lesVisiteurs;
-        }
+    public function getLeVisiteur($login,$mdp){
+        // Création de la requête (sélectionne un visiteur en fction du login/mdp et de son id = 2 (visiteur)
+        $req = "SELECT * from acteur WHERE acteur.idTypeActeur = '2'AND WHERE acteur.login='$login' AND WHERE acteur.mdp='$mdp'";
+        // Exécution de la requête
+        $res = PdoGsb::$monPdo->query($req);
+        // Stockage de la requête dans $lesVisiteurs
+        $lesVisiteurs = $res->fetchAll();
+        // Retourne $lesVisiteurs
+        return $lesVisiteurs;
+    }
 
     /**
      * Permet de récupérer les cabinets
      *
      * @return $lesCabinets mixed Les attributs de la table cabinet sous forme d'un tableau associatif
      */
-    public function getLesCabinets()
-    {
+    public function getLesCabinets(){
         // Création requête
         $req = "SELECT * FROM cabinet";
         // On formate la requête (on la prépare)
@@ -232,8 +245,7 @@ class PdoGsb{
      * @param $idActeur string L'ID de l'acteur associé aux médecins recherchés
      * @return $lesMedecins mixed Les attributs de la table médecin sous forme d'un tableau associatif
      */
-    public function getLesMedecins($idActeur)
-    {
+    public function getLesMedecins($idActeur){
         // Création requête
         $req = "SELECT * FROM medecin WHERE medecin.idActeur = '$idActeur'";
         // Exécution de la requête
@@ -250,8 +262,7 @@ class PdoGsb{
      * @param $idActeur string L'ID de l'acteur associé aux visites recherchés
      * @return $lesVisites mixed Les attributs de la table visite sous forme d'un tableau associatif
      */
-    public function getLesVisites($idActeur)
-    {
+    public function getLesVisites($idActeur){
         // Création requête
         $req = "SELECT * FROM visite WHERE visite.idActeur = '$idActeur'";
         // Exécution de la requête
@@ -343,7 +354,7 @@ class PdoGsb{
     }
 
     /**
-     * Crée une nouvelle fiche de frais et les lignes de frais au forfait pour un acteur et un mois donnés
+     * Créée une nouvelle fiche de frais et les lignes de frais au forfait pour un acteur et un mois donnés
      *
      * récupère le dernier mois en cours de traitement, met à 'CL' son champs idEtat, crée une nouvelle fiche de frais
      * avec un idEtat à 'CR' et crée les lignes de frais forfait de quantités nulles
@@ -370,7 +381,7 @@ class PdoGsb{
     }
 
     /**
-     * Crée un nouveau frais hors forfait pour un acteur et un mois donné
+     * Créée un nouveau frais hors forfait pour un acteur et un mois donné
      * à partir des informations fournies en paramètre
      *
      * @param $idVisiteur int L'ID de l'acteur
@@ -405,8 +416,7 @@ class PdoGsb{
 	 * @param $mois String sous la forme aaaamm
 	 * @return Boolean vrai ou faux
 	*/
-	public function estPremierFraisMois($idVisiteur,$mois)
-	{
+	public function estPremierFraisMois($idVisiteur,$mois){
 		$ok = false;
 		$req = "select count(*) as nblignesfrais from fichefrais 
 		where fichefrais.mois = '$mois' and fichefrais.idvisiteur = '$idVisiteur'";
