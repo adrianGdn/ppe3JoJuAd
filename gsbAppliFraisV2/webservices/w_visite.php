@@ -1,8 +1,14 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ * Retourne un json de toutes les visites attribuées au visiteur dont l'id est passé en paramètre 
+ * 
+ * @param type $idVisiteur
+ * @return json
  */
+function w_getLesVisites($idVisiteur)
+{
+    return json_encode($pdo->getLesVisiteur($idVisiteur));
+}
 
