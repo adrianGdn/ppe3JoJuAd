@@ -1,8 +1,14 @@
 <?php
+include("../include/class.pdogsb.inc.php");
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Permet d'encoder les cabinets récupérer via une requête
+ *
+ * @return string Retourne du JSON
  */
+function w_getLesCabinets()
+{
+    return json_encode($pdo->getLesCabinets());
+}
 
+?>
