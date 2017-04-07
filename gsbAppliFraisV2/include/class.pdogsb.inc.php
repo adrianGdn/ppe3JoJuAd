@@ -134,6 +134,14 @@ class PdoGsb{
 		$lesLignes = $res->fetchAll();
 		return $lesLignes;
 	}
+        
+        public function getLeVisiteur()
+        {
+            $req = "SELECT * from acteur WHERE acteur.idTypeActeur = '2'";
+            $res = PdoGsb::$monPdo->query($req);
+            $lesVisiteurs = $res->fetchAll();
+            return $lesVisiteurs;
+        }
 
 	/**
 	 * Met à jour la table lignefraisforfait pour un acteur et
