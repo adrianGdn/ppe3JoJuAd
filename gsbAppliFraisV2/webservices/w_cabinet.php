@@ -2,7 +2,7 @@
 include("../include/class.pdogsb.inc.php");
 
 /**
- * Permet d'encoder les cabinets récupérer via une requête
+ * Retourne un json de tous les cabinets
  *
  * @return string Retourne du JSON
  */
