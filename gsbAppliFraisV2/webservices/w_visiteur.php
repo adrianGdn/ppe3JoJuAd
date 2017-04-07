@@ -1,8 +1,16 @@
 <?php
+include("../include/class.pdogsb.inc.php");
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * Retourne un json du Visiteur en fonction du login et du mdp passés en paramètre.
+ * 
+ * @param type $login
+ * @param type $mdp
+ * @return json
  */
+function w_getLeVisiteur($login,$mdp)
+{
+    return json_encode($pdo->getLesVisiteurs($login,$mdp));
+}
 
+?>

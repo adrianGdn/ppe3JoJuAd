@@ -135,9 +135,9 @@ class PdoGsb{
 		return $lesLignes;
 	}
         
-        public function getLeVisiteur()
-        {
-            $req = "SELECT * from acteur WHERE acteur.idTypeActeur = '2'";
+        public function getLeVisiteur($login,$mdp)
+        {            
+            $req = "SELECT * from acteur WHERE acteur.idTypeActeur = '2'AND WHERE acteur.login='$login' AND WHERE acteur.mdp='$mdp'";
             $res = PdoGsb::$monPdo->query($req);
             $lesVisiteurs = $res->fetchAll();
             return $lesVisiteurs;
