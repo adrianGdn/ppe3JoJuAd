@@ -1,6 +1,6 @@
 <?php
 require_once("../gsbAppliFraisV2/include/fct.inc.php");
-require_once ("../gsbAppliFraisV2/include/class.pdogsb.inc.php");
+require_once("../gsbAppliFraisV2/include/class.pdogsb.inc.php");
 
 session_start();
 $pdo = PdoGsb::getPdoGsb();
