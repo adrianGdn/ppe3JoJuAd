@@ -190,19 +190,22 @@ class PdoGsb{
     }
 
     /**
-     *
+     *Retourne un visiteur de la base de donnée en fonction du login et mdp passé en paramètre
      *
      * @param $login string Le login du Visiteur
      * @param $mdp string Le mot de passe du visiteur
      * @return $lesVisiteurs mixed Les attributs de la table visiteur sous forme d'un tableau associatif
      */
     public function getLeVisiteur($login,$mdp)
-    {
-        $req = "SELECT * from acteur WHERE acteur.idTypeActeur = '2'AND WHERE acteur.login='$login' AND WHERE acteur.mdp='$mdp'";
-        $res = PdoGsb::$monPdo->query($req);
-        $lesVisiteurs = $res->fetchAll();
-        return $lesVisiteurs;
-    }
+        {   // création de la requête (sélectionne un visiteur en fction du login/mdp et de son id = 2 (visiteur)
+            $req = "SELECT * from acteur WHERE acteur.idTypeActeur = '2'AND WHERE acteur.login='$login' AND WHERE acteur.mdp='$mdp'";
+            // exécute la requête
+            $res = PdoGsb::$monPdo->query($req);
+            // stocke la requête dans $lesVisiteurs
+            $lesVisiteurs = $res->fetchAll();
+            // retourne $lesVisiteurs
+            return $lesVisiteurs;
+        }
 
     /**
      * Permet de récupérer les cabinets
