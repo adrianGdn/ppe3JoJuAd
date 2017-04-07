@@ -190,20 +190,20 @@ class PdoGsb{
     }
 
     /**
-     *Retourne un visiteur de la base de donnée en fonction du login et mdp passé en paramètre
+     * Retourne un visiteur de la base de données en fonction du login et mdp passé en paramètre
      *
      * @param $login string Le login du Visiteur
      * @param $mdp string Le mot de passe du visiteur
      * @return $lesVisiteurs mixed Les attributs de la table visiteur sous forme d'un tableau associatif
      */
     public function getLeVisiteur($login,$mdp)
-        {   // création de la requête (sélectionne un visiteur en fction du login/mdp et de son id = 2 (visiteur)
+        {   // Création de la requête (sélectionne un visiteur en fction du login/mdp et de son id = 2 (visiteur)
             $req = "SELECT * from acteur WHERE acteur.idTypeActeur = '2'AND WHERE acteur.login='$login' AND WHERE acteur.mdp='$mdp'";
-            // exécute la requête
+            // Exécution de la requête
             $res = PdoGsb::$monPdo->query($req);
-            // stocke la requête dans $lesVisiteurs
+            // Stockage de la requête dans $lesVisiteurs
             $lesVisiteurs = $res->fetchAll();
-            // retourne $lesVisiteurs
+            // Retourne $lesVisiteurs
             return $lesVisiteurs;
         }
 
@@ -224,6 +224,42 @@ class PdoGsb{
         $lesCabinets = $res->fetchAll();
         // On retourne les cabinets
         return $lesCabinets;
+    }
+
+    /**
+     * Permet de récupérer les médecins
+     *
+     * @param $idActeur string L'ID de l'acteur associé aux médecins recherchés
+     * @return $lesMedecins mixed Les attributs de la table médecin sous forme d'un tableau associatif
+     */
+    public function getLesMedecins($idActeur)
+    {
+        // Création requête
+        $req = "SELECT * FROM medecin WHERE medecin.idActeur = '$idActeur'";
+        // Exécution de la requête
+        $res = PdoGsb::$monPdo->query($req);
+        // Stockage de la requête dans la variable $lesMedecins
+        $lesMedecins = $res->fetchAll();
+        // Retourne les médecins
+        return $lesMedecins;
+    }
+
+    /**
+     * Permet de récupérer les visites
+     *
+     * @param $idActeur string L'ID de l'acteur associé aux visites recherchés
+     * @return $lesVisites mixed Les attributs de la table visite sous forme d'un tableau associatif
+     */
+    public function getLesVisites($idActeur)
+    {
+        // Création requête
+        $req = "SELECT * FROM visite WHERE visite.idActeur = '$idActeur'";
+        // Exécution de la requête
+        $res = PdoGsb::$monPdo->query($req);
+        // Stockage de la requête dans la variable $lesVisites
+        $lesVisites = $res->fetchAll();
+        // Retourne les médecins
+        return $lesVisites;
     }
 
 	/**
