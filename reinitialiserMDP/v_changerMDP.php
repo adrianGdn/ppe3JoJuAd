@@ -1,8 +1,12 @@
 <?php
+/**
+ * C'est sur cet écran que l'utilisateur va saisir son login
+ */
+
 require_once("../gsbAppliFraisV2/include/fct.inc.php");
 require_once("../gsbAppliFraisV2/include/class.pdogsb.inc.php");
 
-session_start();
+
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
 
@@ -46,12 +50,18 @@ $estConnecte = estConnecte();
                             <div class="content-wrap">
                                 <legend>Saissisez votre login</legend>
                                 <!-- On indique l'action qui doit suivre l'action de cliquer sur le bouton -->
-                                <form method="post" action="../gsbAppliFraisV2/index.php?uc=connexion&action=changerMDP" role='form'>
+                                <form method="post" action="../gsbAppliFraisV2/index.php?uc=connexion&action=redirigeQuestionSecrete" role='form'>
                                     <input name="leLogin" id="leLogin" class="form-control" type="text" placeholder="Votre login">
                                     </br>
-                                    <input type="submit" class="btn btn-primary" name="reinitialisationMDP" value="Réinitialiser votre mot de passe" ><!--onclick="verifieChamp()"-->
+                                    <input type="submit" class="btn btn-primary" name="reinitialisationMDP" value="Valider"><!--onclick="verifieChamp()"-->
                                     </br>
                                 </form>
+                                <!--<form method="post" action="../gsbAppliFraisV2/index.php?uc=connexion&action=changerMDP" role='form'>
+                                    <input name="leLogin" id="leLogin" class="form-control" type="text" placeholder="Votre login">
+                                    </br>
+                                    <input type="submit" class="btn btn-primary" name="reinitialisationMDP" value="Réinitialiser votre mot de passe" >
+                                    </br>
+                                </form>-->
                             </div>
                         </div>
                     </div>

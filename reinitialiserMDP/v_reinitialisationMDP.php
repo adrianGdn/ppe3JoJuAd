@@ -1,8 +1,12 @@
 <?php
-require_once("../gsbAppliFraisV2/include/fct.inc.php");
-require_once ("../gsbAppliFraisV2/include/class.pdogsb.inc.php");
+/**
+ * C'est sur cette page que l'utilisateur va pouvoir réinitialiser son mot de passe
+ */
 
-session_start();
+require_once("../gsbAppliFraisV2/include/fct.inc.php");
+require_once("../gsbAppliFraisV2/include/class.pdogsb.inc.php");
+
+
 $pdo = PdoGsb::getPdoGsb();
 $estConnecte = estConnecte();
 ?>
@@ -33,12 +37,12 @@ $estConnecte = estConnecte();
                         <div class="box">
                             <div class="content-wrap">
                                 <legend>Saissisez votre nouveau mot de passe</legend>
-                                <form method="post" action="index.php?uc=connexion&action=valideConnexion">
-                                    <input name="Mot de passe" id="mdp" class="form-control" type="text" placeholder="Mot de passe">
+                                <form method="post" action="index.php?uc=connexion&action=reinitialisationMDP">
+                                    <input name="mdp" id="mdp" class="form-control" type="text" placeholder="Mot de passe">
                                     </br>
-                                    <input name="Resaisissez votre mot de passe" id="mdpResaissi" class="form-control" type="text" placeholder="Resaisissez votre mot de passe">
+                                    <input name="mdpResaisi" id="mdpResaisi" class="form-control" type="text" placeholder="Resaisissez votre mot de passe">
                                     </br>
-                                    <input type="button" class="btn btn-primary" name="reinitialisationMDP" value="Réinitialiser le mot de passe">
+                                    <input type="submit" class="btn btn-primary" name="reinitialisationMDP" value="Réinitialiser le mot de passe">
                                     </br>
                                 </form>
                             </div>
