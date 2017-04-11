@@ -38,9 +38,9 @@ $estConnecte = estConnecte();
                             <div class="content-wrap">
                                 <legend>Saissisez votre nouveau mot de passe</legend>
                                 <form method="post" action="index.php?uc=connexion&action=reinitialisationMDP">
-                                    <input name="mdp" id="mdp" class="form-control" type="text" placeholder="Mot de passe">
+                                    <input name="mdp" id="mdp" class="form-control" type="password" placeholder="Mot de passe">
                                     </br>
-                                    <input name="mdpResaisi" id="mdpResaisi" class="form-control" type="text" placeholder="Resaisissez votre mot de passe">
+                                    <input name="mdpResaisi" id="mdpResaisi" class="form-control" type="password" placeholder="Resaisissez votre mot de passe">
                                     </br>
                                     <input type="submit" class="btn btn-primary" name="reinitialisationMDP" value="Réinitialiser le mot de passe">
                                     </br>
