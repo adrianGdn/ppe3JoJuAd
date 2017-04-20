@@ -71,5 +71,8 @@
                     $a.='</tr></table>';
                 ?>
             </table>
+            <div>
+                <input class="btn btn-primary" id="genererPDF" type="submit" value="Générer le PDF"/>
+            </div>
         </div>
     </div>
