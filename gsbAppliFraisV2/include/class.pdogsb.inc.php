@@ -495,5 +495,29 @@ class PdoGsb{
         }
         return $estReponseCorrect;
     }
+    
+    public function getMontantFraisID($idFrais)
+    {     
+        $req = "SELECT montant from fraisforfait WHERE fraisforfait.id = '$idFrais'";
+        $res = PdoGsb::$monPdo->query($req);
+        $montant = $res->fetch();
+        return $montant;
+    }
+    
+    public function getQuantiteTotaleParIdFrais($idVisiteur,$idFrais,$mois)
+    {
+        $req = "SELECT SUM(quantite) FROM lignefraisforfait.quantite WHERE lignefraisforfait.idvisiteur = '$idVisiteur' AND lignefraisforfait.idfraisforfait = '$idFrais' and lignefraisforfait.mois = '$mois'";
+        $res = PdoGsb::$monPdo->query($req);
+        $quantiteTotale = $res->fetch();
+        return $quantiteTotale;
+    }
+    
+    public function getLigneFraisForfait()
+    {
+        $req = "SELECT * FROM lignefraisforfait";
+        $res = PdoGsb::$monPdo->query($req);
+        $tableauLigneFraisForfait = $res->fetchAll();
+        return $tableauLigneFraisForfait;
+    }
 }
 ?>
