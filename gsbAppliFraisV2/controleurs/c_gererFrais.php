@@ -31,7 +31,8 @@ switch($action){
 }
 
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
-$lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois);
+$lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois); // tableau des fraisForfait initiaux (id,libelle,quantite)
+$lesFraisForfaitInitiaux= $pdo->getInfosFraisForfaitInitiaux(); // retourne un tableau de frais forfaits uniques avec id,libelle,montant nominal
 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$mois);
 include("vues/v_listeFraisForfait.php");
 ?>
