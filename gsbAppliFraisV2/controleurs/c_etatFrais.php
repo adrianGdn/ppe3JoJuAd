@@ -5,6 +5,8 @@ if($_SESSION['typeActeur'] == 'Administrateur') {
 else {
     include("vues/v_sommaire.php");
 }
+require('include/fpdf.php');
+
 $action = $_REQUEST['action'];
 $idVisiteur = $_SESSION['idVisiteur'];
 switch($action){
@@ -34,6 +36,16 @@ switch($action){
 		$dateModif =  $lesInfosFicheFrais['dateModif'];
 		$dateModif =  dateAnglaisVersFrancais($dateModif);
 		include("vues/v_etatFrais.php");
+		break;
+	}
+
+	case 'genererPDF':{
+		$pdf=new FPDF();
+		$pdf->AddPage();
+		$pdf->SetFont('Arial','B',16);
+		$pdf->Cell(40,10,'Hello World !');
+		$pdf->Output();
+		break;
 	}
 }
 ?>
