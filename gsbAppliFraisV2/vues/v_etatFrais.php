@@ -5,7 +5,7 @@
         </div>
         <div class="panel-body">
             </br></br>
-            <h3>Etat : <?php echo $libEtat?> depuis le <?php echo $dateModif?> <br></br> </h3>
+            <h3>Etat : <?php echo $libEtat?> depuis le <?php echo $dateModif?> </h3>
             </br></br>
 
             <table class="table">
@@ -71,8 +71,8 @@
                     $a.='</tr></table>';
                 ?>
             </table>
-            <div>
+            <form action="index.php?uc=etatFrais&action=genererPDF" method="post">
                 <input class="btn btn-primary" id="genererPDF" type="submit" value="Générer le PDF"/>
-            </div>
+            </form>
         </div>
     </div>
