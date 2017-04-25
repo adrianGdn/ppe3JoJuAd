@@ -5,7 +5,6 @@ if($_SESSION['typeActeur'] == 'Administrateur') {
 else {
     include("vues/v_sommaire.php");
 }
-require('include/fpdf.php');
 
 $action = $_REQUEST['action'];
 $idVisiteur = $_SESSION['idVisiteur'];
@@ -40,11 +39,19 @@ switch($action){
 	}
 
 	case 'genererPDF':{
-		$pdf=new FPDF();
+		require('include/fpdf.php');
+		ob_start();
+
+		$pdf = new FPDF();
 		$pdf->AddPage();
 		$pdf->SetFont('Arial','B',16);
 		$pdf->Cell(40,10,'Hello World !');
 		$pdf->Output();
+
+
+
+
+		ob_end_flush();
 		break;
 	}
 }
