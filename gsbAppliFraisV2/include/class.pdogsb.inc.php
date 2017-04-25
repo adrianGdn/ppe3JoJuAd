@@ -272,6 +272,47 @@ class PdoGsb{
         // Retourne les médecins
         return $lesVisites;
     }
+    /**
+     * Recupère le montant du frais  en fonction de l'id du frais
+     * @param type $idFrais
+     * @return double
+     */
+    public function getMontantFraisID($idFrais)
+    {     
+        $req = "SELECT montant from fraisforfait WHERE fraisforfait.id = '$idFrais'";
+        $res = PdoGsb::$monPdo->query($req);
+        $montant = $res->fetch();
+        return $montant;
+    }
+    
+    /**
+     * Recupère la quantité totale de frais en fonction de l'id du frais
+     * 
+     * @param type $idVisiteur
+     * @param type $idFrais
+     * @param type $mois
+     * @return double
+     */
+    public function getQuantiteTotaleParIdFrais($idVisiteur,$idFrais,$mois)
+    {
+        $req = "SELECT SUM(quantite) FROM lignefraisforfait.quantite WHERE lignefraisforfait.idvisiteur = '$idVisiteur' AND lignefraisforfait.idfraisforfait = '$idFrais' and lignefraisforfait.mois = '$mois'";
+        $res = PdoGsb::$monPdo->query($req);
+        $quantiteTotale = $res->fetch();
+        return $quantiteTotale;
+    }
+    
+    /**
+     * retourne un tableau contenant toutes les lignes de frais forfait
+     * 
+     * @return array fraisforfait
+     */
+    public function getLigneFraisForfait()
+    {
+        $req = "SELECT * FROM lignefraisforfait";
+        $res = PdoGsb::$monPdo->query($req);
+        $tableauLigneFraisForfait = $res->fetchAll();
+        return $tableauLigneFraisForfait;
+    }
 
 	/**
 	 * Met à jour la table lignefraisforfait pour un acteur et
@@ -494,30 +535,6 @@ class PdoGsb{
             $estReponseCorrect = true;
         }
         return $estReponseCorrect;
-    }
-    
-    public function getMontantFraisID($idFrais)
-    {     
-        $req = "SELECT montant from fraisforfait WHERE fraisforfait.id = '$idFrais'";
-        $res = PdoGsb::$monPdo->query($req);
-        $montant = $res->fetch();
-        return $montant;
-    }
-    
-    public function getQuantiteTotaleParIdFrais($idVisiteur,$idFrais,$mois)
-    {
-        $req = "SELECT SUM(quantite) FROM lignefraisforfait.quantite WHERE lignefraisforfait.idvisiteur = '$idVisiteur' AND lignefraisforfait.idfraisforfait = '$idFrais' and lignefraisforfait.mois = '$mois'";
-        $res = PdoGsb::$monPdo->query($req);
-        $quantiteTotale = $res->fetch();
-        return $quantiteTotale;
-    }
-    
-    public function getLigneFraisForfait()
-    {
-        $req = "SELECT * FROM lignefraisforfait";
-        $res = PdoGsb::$monPdo->query($req);
-        $tableauLigneFraisForfait = $res->fetchAll();
-        return $tableauLigneFraisForfait;
     }
 }
 ?>
