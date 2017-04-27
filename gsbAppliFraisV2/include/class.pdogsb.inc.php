@@ -274,8 +274,8 @@ class PdoGsb{
     }
     /**
      * Recupère le montant du frais  en fonction de l'id du frais
-     * @param type $idFrais
-     * @return double
+     * @param $idFrais string
+     * @return $montant double
      */
     public function getMontantFraisID($idFrais)
     {     
@@ -288,9 +288,9 @@ class PdoGsb{
     /**
      * Recupère la quantité totale de frais en fonction de l'id du frais
      * 
-     * @param type $idVisiteur
-     * @param type $idFrais
-     * @param type $mois
+     * @param $idVisiteur int
+     * @param $idFrais string
+     * @param $mois string
      * @return double
      */
     public function getQuantiteTotaleParIdFrais($idVisiteur,$idFrais,$mois)
@@ -302,7 +302,7 @@ class PdoGsb{
     }
     
     /**
-     * retourne un tableau contenant toutes les lignes de frais forfait
+     * Retourne un tableau contenant toutes les lignes de frais forfait
      * 
      * @return array fraisforfait
      */
@@ -455,14 +455,14 @@ class PdoGsb{
      * Créée un nouveau frais forfaitisé pour un acteur et un mois donné
      * à partir des informations fournies en paramètre
      * 
-     * @param type $idVisiteur
-     * @param type $mois
-     * @param type $idFrais
-     * @param type $montant
-     * @param type $typeDuFraisForfait
-     * @param type $dateDeLaDepense
-     * @param type $description
-     * @param type $quantite
+     * @param $idVisiteur int
+     * @param $mois string
+     * @param $idFrais int
+     * @param $montant double
+     * @param type $typeDuFraisForfait ????
+     * @param $dateDeLaDepense date ????
+     * @param $description string
+     * @param $quantite int
      */
     public function creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$montant,$typeDuFraisForfait,$dateDeLaDepense,$description,$quantite)
         {
