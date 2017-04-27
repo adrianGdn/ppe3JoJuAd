@@ -234,4 +234,30 @@ function envoieUnMail($adresseMail){
 	$message = "Bonjour Madame, Monsieurs, \n \n Le lien de réinitialisation de votre mot de passe est le suivant : \n liensBlop \n \n Cordialement,\n L'équipe GSB.";
 	mail($adresseMail, $sujet, $message);
 }
+
+/**
+ * Retourne l'id du frais en fonction de son libellé
+ * 
+ * @param type $typeDuFrais
+ * @return string
+ */
+function donneIdTypeFrais($typeDuFrais)
+{
+    $idConverti;
+    switch($typeDuFrais)
+    {
+     case "Forfait Etape":
+      return  $idConverti = "ETP";
+      break;
+    case "Frais Kilometrique":
+       return $idConverti = "KMN";
+       break;
+    case "Nuitée Hôtel":
+       return $idConverti = "NUI";
+       break;
+    case "Repas Restaurant":
+        return $idConverti = "REP";
+        break;
+    }
+}
 ?>

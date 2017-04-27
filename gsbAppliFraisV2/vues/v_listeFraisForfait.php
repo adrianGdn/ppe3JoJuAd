@@ -15,7 +15,7 @@
 
 
 <?php
-echo(var_dump($lesFraisForfaitInitiaux));
+echo(var_dump($lesInfosFicheFrais));
 ?>
 
         <div>
@@ -53,6 +53,7 @@ echo(var_dump($lesFraisForfaitInitiaux));
                         </br></br>
                     </div>
                 </div>
+                <!-- bouton validation de la creation de frais forfait -->
                 <div class="horizontal-form">
                     <input class="btn btn-primary" id="btn_valider" type="submit" value="Valider" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?> />
                 </div>

@@ -450,6 +450,27 @@ class PdoGsb{
 		VALUES(DEFAULT,'$idVisiteur','$mois','$libelle','$dateFr','$montant')";
         PdoGsb::$monPdo->exec($req);
     }
+    
+    /**
+     * Créée un nouveau frais forfaitisé pour un acteur et un mois donné
+     * à partir des informations fournies en paramètre
+     * 
+     * @param type $idVisiteur
+     * @param type $mois
+     * @param type $idFrais
+     * @param type $montant
+     * @param type $typeDuFraisForfait
+     * @param type $dateDeLaDepense
+     * @param type $description
+     * @param type $quantite
+     */
+    public function creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$montant,$typeDuFraisForfait,$dateDeLaDepense,$description,$quantite)
+        {
+            $dateFr = dateFrancaisVersAnglais($dateDeLaDepense);
+            $req = "INSERT INTO lignefraisforfait 
+		values(DEFAULT,'$idVisiteur','$mois','$idFrais','$quantite','$montant','$dateFr','$typeDuFraisForfait','$description')";
+		PdoGsb::$monPdo->exec($req);
+        }
 
     /**
      * Permet l'ajout d'un frais forfait
