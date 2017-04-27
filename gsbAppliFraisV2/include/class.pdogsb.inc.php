@@ -458,15 +458,14 @@ class PdoGsb{
      * @param $idVisiteur int
      * @param $mois string
      * @param $idFrais int
-     * @param $montant double
      * @param $description string
      * @param $quantite int
      */
-    public function creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$montant,$description,$quantite)
+    public function creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$description,$quantite)
         {
             $dateFr = dateFrancaisVersAnglais($dateDeLaDepense);
             $req = "INSERT INTO lignefraisforfait 
-		values(DEFAULT,'$idVisiteur','$mois','$idFrais','$quantite','$montant','$description')";
+		values(DEFAULT,'$idVisiteur','$mois','$idFrais','$quantite','$description')";
 		PdoGsb::$monPdo->exec($req);
         }
 
