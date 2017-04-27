@@ -71,8 +71,8 @@
                     $a.='</tr></table>';
                 ?>
             </table>
-            <form action="index.php?uc=etatFrais&action=genererPDF" method="post">
-                <input class="btn btn-primary" id="genererPDF" type="submit" value="Générer le PDF"/>
-            </form>
+            <div>
+                <a class="btn btn-primary" href="#">Générer le PDF</a>
+            </div>
         </div>
     </div>
