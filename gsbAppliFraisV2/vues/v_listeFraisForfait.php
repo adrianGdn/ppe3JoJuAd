@@ -16,6 +16,16 @@
 
 <?php
 echo(var_dump($lesInfosFicheFrais));
+echo(var_dump($typeDuFraisForfait));
+echo(var_dump($mois));
+echo(var_dump($idFrais));
+echo(var_dump($dateDeLaDepense));
+echo(var_dump($description));
+echo(var_dump($quantite));
+echo(var_dump($tableauMontant));
+echo(var_dump($montant));
+echo(var_dump($idVisiteur));
+echo(var_dump($testMethodeEstFicheForfaitExistante));
 ?>
 
         <div>
@@ -41,7 +51,7 @@ echo(var_dump($lesInfosFicheFrais));
                         </br>
                         <label for="txtDateHF"> Date de l'engagement de la dépense : (jj/mm/aaaa): </label>
                         </br>
-                        <input class="form-control" type="text" id="txtDateDepenseFF" name="dateDepense" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { 		echo 'disabled';};   ?>/>
+                        <input class="form-control" type="datetime" id="txtDateDepenseFF" name="dateDepense" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { 		echo 'disabled';};   ?>/>
                         </br></br>
                         <label for="txtLibelleHF">Description</label>
                         </br>
