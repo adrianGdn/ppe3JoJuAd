@@ -72,7 +72,12 @@
                 ?>
             </table>
             <div>
-                <a class="btn btn-primary" href="#">Générer le PDF</a>
+                <?php
+                $nom = $_SESSION['nom'];
+                $prenom = $_SESSION['prenom'];
+                $idVisiteur = $_SESSION['idVisiteur'];
+                echo '<a class="btn btn-primary" href="/ppe3JoJuAd/gsbAppliFraisV2/GenerationPDF/generePDF.php?leMois='.$leMois.'&nom='.$nom.'&prenom='.$prenom.'&idVisiteur='.$idVisiteur.'&numAnnee='.$numAnnee.'">Générer le PDF</a>';
+                ?>
             </div>
         </div>
     </div>
