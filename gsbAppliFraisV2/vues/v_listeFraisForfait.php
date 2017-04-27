@@ -4,15 +4,12 @@
 			<div class="panel-title"><h2></h2></div>
 			</br></br>
 		    <legend>Eléments forfaitisés</legend>
-                    <legend>Eléments forfaitisés</legend>
 		</div>
 		<div class="panel-body">
 
             <label>Renseigner ma fiche de frais du mois de: </label>
 
             <form action="index.php?uc=gererFrais&action=creationFraisForfait" method="post"></form>
-
-        <div>
             <label name="lblElemForf">Eléments forfaitisés (synthèse du mois)</label> <br/>
 
             <form class="form-horizontal" role="form" action="index.php?uc=gererFrais&action=creationFraisForfait" method="post">
@@ -54,5 +51,4 @@
             </form>
         </div>      
     </div>
-</div>
 </div>
