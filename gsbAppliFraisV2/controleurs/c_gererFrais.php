@@ -28,6 +28,18 @@ switch($action){
 			include("vues/v_erreurs.php");
 		} break;
 	}
+        case 'creationFraisForfait':{
+            
+            $typeDuFraisForfait = $_REQUEST['typeDuFrais'];
+            $idFrais = donneIdTypeFrais($typeDuFraisForfait);
+            $dateDeLaDepense = $_REQUEST['dateDepense'];
+            $description = $_REQUEST['description'];
+            $quantite = $_REQUEST['quantite'];
+            $tableauMontant=$pdo->getMontantFraisID($idFrais);
+            $montant = $tableauMontant[0];
+            
+            $pdo->creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$montant,$typeDuFraisForfait,$dateDeLaDepense,$description,$quantite);
+    }break;
 }
 
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
