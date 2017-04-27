@@ -139,7 +139,7 @@ function estDateValide($date){
 /**
  * Vérifie que le tableau de frais ne contient que des valeurs numériques
  *
- * @param $lesFrais : Le tableau de frais que l'on veut tester
+ * @param $lesFrais mixed Le tableau de frais que l'on veut tester
  * @return bool Vrai ou faux
 */
 function lesQteFraisValides($lesFrais){
@@ -229,6 +229,11 @@ function getNomMois($numMois){
     return $nomMois[$numMois];
 }
 
+/**
+ * Fonction inutilisé pour le moment, devait servir pour la réinitialisation de mot de passe mais une autre méthode à été trouvé
+ *
+ * @param $adresseMail string L'adresse mail de l'acteur
+ */
 function envoieUnMail($adresseMail){
 	$sujet = "Lien de réinitialisation de votre mot de passe";
 	$message = "Bonjour Madame, Monsieurs, \n \n Le lien de réinitialisation de votre mot de passe est le suivant : \n liensBlop \n \n Cordialement,\n L'équipe GSB.";
@@ -236,28 +241,26 @@ function envoieUnMail($adresseMail){
 }
 
 /**
- * Retourne l'id du frais en fonction de son libellé
+ * Retourne l'identifiant du frais en fonction de son libellé
  * 
- * @param type $typeDuFrais
- * @return string
+ * @param string $description La description de la fiche de frais
+ * @return string L'identifiant de la fiche de frais
  */
-function donneIdTypeFrais($typeDuFrais)
+function donneIdTypeFrais($description)
 {
-    $idConverti;
-    switch($typeDuFrais)
-    {
-     case "Forfait Etape":
-      return  $idConverti = "ETP";
-      break;
-    case "Frais Kilometrique":
-       return $idConverti = "KMN";
-       break;
-    case "Nuitée Hôtel":
-       return $idConverti = "NUI";
-       break;
-    case "Repas Restaurant":
-        return $idConverti = "REP";
-        break;
+    switch($description){
+		case "Forfait Etape":
+			return  $idConverti = "ETP";
+			break;
+		case "Frais Kilometrique":
+			return $idConverti = "KMN";
+			break;
+		case "Nuitée Hôtel":
+			return $idConverti = "NUI";
+			break;
+		case "Repas Restaurant":
+			return $idConverti = "REP";
+			break;
     }
 }
 ?>

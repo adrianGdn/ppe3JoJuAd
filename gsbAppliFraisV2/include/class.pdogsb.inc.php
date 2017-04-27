@@ -274,8 +274,8 @@ class PdoGsb{
     }
     /**
      * Recupère le montant du frais  en fonction de l'id du frais
-     * @param $idFrais string
-     * @return $montant double
+     * @param $idFrais string L'identifiant de la fiche de frais
+     * @return $montant double Montant de la fiche de frais
      */
     public function getMontantFraisID($idFrais)
     {     
@@ -286,12 +286,12 @@ class PdoGsb{
     }
     
     /**
-     * Recupère la quantité totale de frais en fonction de l'id du frais
+     * Recupère la quantité totale de frais en fonction de l'identifiant du frais
      * 
-     * @param $idVisiteur int
-     * @param $idFrais string
-     * @param $mois string
-     * @return double
+     * @param $idVisiteur int L'identifiant de l'acteur
+     * @param $idFrais string L'identifiant de la fiche de frais
+     * @param $mois string Le mois où la fiche de frais a été créée
+     * @return $quantiteTotale double La quantité de fiche de frais existante
      */
     public function getQuantiteTotaleParIdFrais($idVisiteur,$idFrais,$mois)
     {
@@ -304,7 +304,7 @@ class PdoGsb{
     /**
      * Retourne un tableau contenant toutes les lignes de frais forfait
      * 
-     * @return array fraisforfait
+     * @return $tableauLigneFraisForfait array Un tableau contenant les lignes de frais forfait
      */
     public function getLigneFraisForfait()
     {
@@ -352,7 +352,7 @@ class PdoGsb{
 	 *
 	 * @param $idVisiteur int L'ID de l'acteur
 	 * @param $mois String sous la forme aaaamm
-	 * @param $nbJustificatifs
+	 * @param $nbJustificatifs int Le nombre de justificatif
 	*/
 	public function majNbJustificatifs($idVisiteur, $mois, $nbJustificatifs){
 		$req = "UPDATE fichefrais SET nbjustificatifs = $nbJustificatifs 
@@ -455,11 +455,11 @@ class PdoGsb{
      * Créée un nouveau frais forfaitisé pour un acteur et un mois donné
      * à partir des informations fournies en paramètre
      * 
-     * @param $idVisiteur int
-     * @param $mois string
-     * @param $idFrais int
-     * @param $description string
-     * @param $quantite int
+     * @param $idVisiteur int L'identifiany du visiteur
+     * @param $mois string Le mois de la fiche de frais
+     * @param $idFrais int L'identifiant de la fiche de frais
+     * @param $description string La description de la fiche de frais
+     * @param $quantite int La quantité de la fiche de frais
      */
     public function creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$description,$quantite,$dateDeLaDepense)
         {
@@ -486,7 +486,7 @@ class PdoGsb{
 	 *
 	 * @param $idVisiteur int L'ID de l'acteur
 	 * @param $mois String sous la forme aaaamm
-	 * @return Boolean vrai ou faux
+	 * @return Boolean Vrai ou faux
 	*/
 	public function estPremierFraisMois($idVisiteur,$mois){
 		$ok = false;
