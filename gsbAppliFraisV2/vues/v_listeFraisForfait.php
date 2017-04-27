@@ -12,22 +12,6 @@
 
             <form action="index.php?uc=gererFrais&action=creationFraisForfait" method="post"></form>
 
-
-
-<?php
-echo(var_dump($lesInfosFicheFrais));
-echo(var_dump($typeDuFraisForfait));
-echo(var_dump($mois));
-echo(var_dump($idFrais));
-echo(var_dump($dateDeLaDepense));
-echo(var_dump($description));
-echo(var_dump($quantite));
-echo(var_dump($tableauMontant));
-echo(var_dump($montant));
-echo(var_dump($idVisiteur));
-echo(var_dump($testMethodeEstFicheForfaitExistante));
-?>
-
         <div>
             <label name="lblElemForf">Eléments forfaitisés (synthèse du mois)</label> <br/>
 
