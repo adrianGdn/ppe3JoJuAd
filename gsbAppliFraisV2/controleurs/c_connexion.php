@@ -13,8 +13,8 @@ switch($action){
         // On récupère le login de l'utilisateur saisi précédemment
         $login = $_SESSION['login'];
         // On récupère les mot de passe saisi par l'utilisateur et on vérifie qu'ils sont identiques
-        $mdp= $_REQUEST['mdp'];
-        $mdpResaisi= $_REQUEST['mdpResaisi'];
+        $mdp = $_REQUEST['mdp'];
+        $mdpResaisi = $_REQUEST['mdpResaisi'];
         if($mdp == $mdpResaisi){
             $pdo->updateMDP($login, $mdp);
             ajouterErreur("Votre mot de passe a été modifié avec succès. Vous allez maintenant être redirigé sur l'écran principal.");
