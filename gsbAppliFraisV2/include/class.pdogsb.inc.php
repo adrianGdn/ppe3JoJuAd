@@ -18,8 +18,8 @@
 
 class PdoGsb{   		
       	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=gsbapplifrais';
-      	private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+      	private static $bdd='dbname=adrian';
+      	private static $user='adrian' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
       	private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
 		private static $monPdo;
 		private static $monPdoGsb=null;
@@ -459,16 +459,14 @@ class PdoGsb{
      * @param $mois string
      * @param $idFrais int
      * @param $montant double
-     * @param type $typeDuFraisForfait ????
-     * @param $dateDeLaDepense date ????
      * @param $description string
      * @param $quantite int
      */
-    public function creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$montant,$typeDuFraisForfait,$dateDeLaDepense,$description,$quantite)
+    public function creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$montant,$description,$quantite)
         {
             $dateFr = dateFrancaisVersAnglais($dateDeLaDepense);
             $req = "INSERT INTO lignefraisforfait 
-		values(DEFAULT,'$idVisiteur','$mois','$idFrais','$quantite','$montant','$dateFr','$typeDuFraisForfait','$description')";
+		values(DEFAULT,'$idVisiteur','$mois','$idFrais','$quantite','$montant','$description')";
 		PdoGsb::$monPdo->exec($req);
         }
 
