@@ -1,8 +1,8 @@
 ﻿<?php
-//session_start();
 require_once("include/fct.inc.php");
 require_once ("include/class.pdogsb.inc.php");
 $pdo = PdoGsb::getPdoGsb();
+session_start();
 $estConnecte = estConnecte();
 if(!isset($_REQUEST['uc']) || !$estConnecte){
      $_REQUEST['uc'] = 'connexion';
