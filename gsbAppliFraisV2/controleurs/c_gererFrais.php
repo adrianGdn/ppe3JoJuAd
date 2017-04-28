@@ -46,6 +46,6 @@ $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
 $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois); // tableau des fraisForfait initiaux (id,libelle,quantite)
 $lesFraisForfaitInitiaux= $pdo->getInfosFraisForfaitInitiaux(); // retourne un tableau de frais forfaits uniques avec id,libelle,montant nominal
 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$mois);
-$testMethodeEstFicheForfaitExistante = $pdo->estFicheForfaitExistante('a17','201705','ETP');
+$tabQuantitéMonatantTotaleFrais = $pdo->recupQteEtMontTotalFF($mois);
 include("vues/v_listeFraisForfait.php");
 ?>
