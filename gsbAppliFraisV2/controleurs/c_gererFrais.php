@@ -29,7 +29,7 @@ switch($action){
             } break;
         }
     case 'creationFraisForfait':{
-        echo"<script> alert('tu es passé dans le case creation frais forfait') </script>";
+        //echo"<script> alert('tu es passé dans le case creation frais forfait') </script>";
             $typeDuFraisForfait = $_REQUEST['typeDuFrais'];
             $idFrais = donneIdTypeFrais($typeDuFraisForfait);
             $dateDeLaDepense = $_REQUEST['dateDepense'];
