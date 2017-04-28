@@ -29,11 +29,11 @@
                             </option>
                         </select>                        
                         </br>
-                        <label for="txtDateHF"> Date de l'engagement de la dépense : (jj/mm/aaaa): </label>
+                        <label for="txtDateHF"> Date de l'engagement de la dépense : (jour uniquement, le mois et l'année sont saisis automatiquements)</label>
                         </br>
-                        <input class="form-control" type="datetime" id="txtDateDepenseFF" name="dateDepense" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { 		echo 'disabled';};   ?>/>
+                        <input class="form-control" type="number" id="txtDateDepenseFF" name="dateDepense" maxlength="2" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { 		echo 'disabled';};   ?>/>
                         </br></br>
-                        <label for="txtLibelleHF">Description</label>
+                        <label for="txtLibelleHF">Description :</label>
                         </br>
                         <input class="form-control" type="text" id="txtDescriptionFF" name="description"  <?php if ($lesInfosFicheFrais['idEtat']!='CR') { 		echo 'disabled';};   ?>/>
                         </br></br>
@@ -64,18 +64,52 @@
                ?>
       </tr>
       <tr>
-            <td>Montant Totale :</td>
+            <td>Montant Total :</td>
             <?php   foreach ($tabQuantitéMonatantTotaleFrais as $unMontant)
                     {
                         echo ("<td>");
                         echo $unMontant[2];
                         echo ("</td>");
                     }
+
             ?>
             </tr>
         </table>
-    </div>
-    <div>
 
+        <label>Total des frais forfaitisées pour le mois:</label>
+        <?php
+        $quantiteTotale = 0;
+        foreach ($tabQuantitéMonatantTotaleFrais as $unMontant)
+        {
+            $quantiteTotale = $quantiteTotale + $unMontant[2];
+        }
+        echo $quantiteTotale;
+        ?>
+        <div>
+        <label> Elements forfaitisés (détails du mois)</label>
+        </div>
+    <div>
+        <table width="80%" border="1">
+                <?php  foreach ($tabLigneFraisForfait as $dateEntreeFiche)
+                       {
+                           echo"<tr>";
+                           echo "<td>";
+                           echo $dateEntreeFiche[6];
+                           echo "</td>";
+                           echo "<td>";
+                           echo $dateEntreeFiche[2];
+                           echo "</td>";
+                           echo "<td>";
+                           echo $dateEntreeFiche[4];
+                           echo "</td>";
+                           echo "<td>";
+                           echo $dateEntreeFiche[3];
+                           echo "</td>";
+                           echo"</tr>";
+                       }
+                ?>
+        </table>
     </div>
+</div>
+
 </div>

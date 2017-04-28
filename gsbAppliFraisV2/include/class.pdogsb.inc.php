@@ -17,17 +17,19 @@
  */
 
 class PdoGsb{
-      	private static $serveur='mysql:host=localhost';
-      	private static $bdd='dbname=gsbapplifrais';
-      	private static $user='jojuad' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-      	private static $mdp='AzertY!59000' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
-		private static $monPdo;
-		private static $monPdoGsb=null;
+    private static $serveur='mysql:host=localhost';
+    private static $bdd='dbname=gsbapplifrais';
+    //private static $user='root' ;
+    //private static $mdp='' ;
+    private static $user='jojuad' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
+    private static $mdp='AzertY!59000' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+    private static $monPdo;
+    private static $monPdoGsb=null;
 
 	/**
-	 * Constructeur privé, crée l'instance de PDO qui sera sollicitée
-	 * pour toutes les méthodes de la classe
-	 */
+     * Constructeur privé, crée l'instance de PDO qui sera sollicitée
+     * pour toutes les méthodes de la classe
+     */
 	private function __construct(){
     	PdoGsb::$monPdo = new PDO(PdoGsb::$serveur.';'.PdoGsb::$bdd, PdoGsb::$user, PdoGsb::$mdp);
 		PdoGsb::$monPdo->query("SET CHARACTER SET utf8");
@@ -37,12 +39,12 @@ class PdoGsb{
 	}
 
 	/**
-	 * Fonction statique qui crée l'unique instance de la classe
-	 *
-	 * Appel : $instancePdoGsb = PdoGsb::getPdoGsb();
-	 *
-	 * @return mixed l'unique objet de la classe PdoGsb
-	 */
+     * Fonction statique qui crée l'unique instance de la classe
+     *
+     * Appel : $instancePdoGsb = PdoGsb::getPdoGsb();
+     *
+     * @return mixed l'unique objet de la classe PdoGsb
+     */
 	public static function getPdoGsb(){
 		if(PdoGsb::$monPdoGsb==null){
 			PdoGsb::$monPdoGsb= new PdoGsb();
@@ -51,12 +53,12 @@ class PdoGsb{
 	}
 
 	/**
-	 * Retourne les informations d'un acteur
-	 *
-	 * @param $login string Le login de l'acteur
-	 * @param $mdp string Le mot de passe de l'acteur
-	 * @return mixed l'id, le nom, le prénom et le type d'acteur sous la forme d'un tableau associatif
-	*/
+     * Retourne les informations d'un acteur
+     *
+     * @param $login string Le login de l'acteur
+     * @param $mdp string Le mot de passe de l'acteur
+     * @return mixed l'id, le nom, le prénom et le type d'acteur sous la forme d'un tableau associatif
+     */
     public function getInfosActeur($login, $mdp){
         $req = "SELECT acteur.id as id, acteur.nom as nom, acteur.prenom as prenom, typeacteur.leTypeActeur as typeActeur FROM acteur
 		INNER JOIN typeacteur ON acteur.idTypeActeur = typeacteur.id
@@ -67,16 +69,16 @@ class PdoGsb{
     }
 
 	/**
-	 * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
-	 * concernées par les deux arguments
-	 *
-	 * La boucle foreach ne peut être utilisée ici car on procède
-	 * à une modification de la structure itérée - transformation du champ date-
-	 *
-	 * @param $idVisiteur
-	 * @param $mois String sous la forme aaaamm
-	 * @return mixed tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
-	*/
+     * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
+     * concernées par les deux arguments
+     *
+     * La boucle foreach ne peut être utilisée ici car on procède
+     * à une modification de la structure itérée - transformation du champ date-
+     *
+     * @param $idVisiteur
+     * @param $mois String sous la forme aaaamm
+     * @return mixed tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
+     */
 	public function getLesFraisHorsForfait($idVisiteur,$mois){
 	    $req = "SELECT * FROM lignefraishorsforfait WHERE lignefraishorsforfait.idvisiteur ='$idVisiteur'
 		AND lignefraishorsforfait.mois = '$mois' ";
@@ -91,12 +93,12 @@ class PdoGsb{
 	}
 
 	/**
-	 * Retourne le nombre de justificatif d'un acteur pour un mois donné
-	 *
-	 * @param $idVisiteur int L'ID de l'acteur
-	 * @param $mois String sous la forme aaaamm
-	 * @return mixed le nombre entier de justificatifs
-	*/
+     * Retourne le nombre de justificatif d'un acteur pour un mois donné
+     *
+     * @param $idVisiteur int L'ID de l'acteur
+     * @param $mois String sous la forme aaaamm
+     * @return mixed le nombre entier de justificatifs
+     */
 	public function getNbjustificatifs($idVisiteur, $mois){
 		$req = "SELECT fichefrais.nbjustificatifs AS nb FROM  fichefrais WHERE fichefrais.idvisiteur ='$idVisiteur' AND fichefrais.mois = '$mois'";
 		$res = PdoGsb::$monPdo->query($req);
@@ -105,13 +107,13 @@ class PdoGsb{
 	}
 
 	/**
-	 * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
-	 * concernées par les deux arguments
-	 *
-	 * @param $idVisiteur int L'ID de l'acteur
-	 * @param $mois String sous la forme aaaamm
-	 * @return mixed l'id, le libelle et la quantité sous la forme d'un tableau associatif
-	*/
+     * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
+     * concernées par les deux arguments
+     *
+     * @param $idVisiteur int L'ID de l'acteur
+     * @param $mois String sous la forme aaaamm
+     * @return mixed l'id, le libelle et la quantité sous la forme d'un tableau associatif
+     */
 	public function getLesFraisForfait($idVisiteur, $mois){
 		$req = "SELECT fraisforfait.id AS idfrais, fraisforfait.libelle AS libelle,
 		lignefraisforfait.quantite AS quantite FROM lignefraisforfait INNER JOIN fraisforfait
@@ -124,10 +126,10 @@ class PdoGsb{
 	}
 
 	/**
-	 * Retourne tous les ID de la table FraisForfait
-	 *
-	 * @return array un tableau associatif
-	*/
+     * Retourne tous les ID de la table FraisForfait
+     *
+     * @return array un tableau associatif
+     */
 	public function getInfosFraisForfaitInitiaux(){
 		$req = "SELECT * FROM fraisforfait";
 		$res = PdoGsb::$monPdo->query($req);
@@ -315,13 +317,13 @@ class PdoGsb{
     }
 
 	/**
-	 * Met à jour la table lignefraisforfait pour un acteur et
-	 * un mois donné en enregistrant les nouveaux montants
-	 *
-	 * @param $idVisiteur int L'ID de l'acteur
-	 * @param $mois String sous la forme aaaamm
-	 * @param $lesFrais array tableau associatif de clé idFrais et de valeur la quantité pour ce frais
-	*/
+     * Met à jour la table lignefraisforfait pour un acteur et
+     * un mois donné en enregistrant les nouveaux montants
+     *
+     * @param $idVisiteur int L'ID de l'acteur
+     * @param $mois String sous la forme aaaamm
+     * @param $lesFrais array tableau associatif de clé idFrais et de valeur la quantité pour ce frais
+     */
 	public function majFraisForfait($idVisiteur, $mois, $lesFrais){
 		$lesCles = array_keys($lesFrais);
 		foreach($lesCles as $unIdFrais){
@@ -347,13 +349,13 @@ class PdoGsb{
     }
 
 	/**
-	 * Met à jour le nombre de justificatifs de la table fichefrais
-	 * pour le mois et l'acteur concerné
-	 *
-	 * @param $idVisiteur int L'ID de l'acteur
-	 * @param $mois String sous la forme aaaamm
-	 * @param $nbJustificatifs int Le nombre de justificatif
-	*/
+     * Met à jour le nombre de justificatifs de la table fichefrais
+     * pour le mois et l'acteur concerné
+     *
+     * @param $idVisiteur int L'ID de l'acteur
+     * @param $mois String sous la forme aaaamm
+     * @param $nbJustificatifs int Le nombre de justificatif
+     */
 	public function majNbJustificatifs($idVisiteur, $mois, $nbJustificatifs){
 		$req = "UPDATE fichefrais SET nbjustificatifs = $nbJustificatifs
 		WHERE fichefrais.idvisiteur = '$idVisiteur' AND fichefrais.mois = '$mois'";
@@ -462,12 +464,12 @@ class PdoGsb{
      * @param $quantite int La quantité de la fiche de frais
      */
     public function creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$quantite,$description,$dateDeLaDepense)
-        {
-            $dateEn = dateFrancaisVersAnglais($dateDeLaDepense);
-            $req = "INSERT INTO lignefraisforfait(idVisiteur,mois,idFraisForfait,quantite,description,dateFraisForfait)
+    {
+        $dateEn = dateFrancaisVersAnglais($dateDeLaDepense);
+        $req = "INSERT INTO lignefraisforfait(idVisiteur,mois,idFraisForfait,quantite,description,dateFraisForfait)
 		VALUES('$idVisiteur',$mois,'$idFrais',$quantite,'$description','$dateEn')";
 		PdoGsb::$monPdo->exec($req);
-        }
+    }
 
     /**
      * Permet l'ajout d'un frais forfait
@@ -482,12 +484,12 @@ class PdoGsb{
     }
 
 	/**
-	 * Teste si un acteur possède une fiche de frais pour le mois passé en argument
-	 *
-	 * @param $idVisiteur int L'ID de l'acteur
-	 * @param $mois String sous la forme aaaamm
-	 * @return Boolean Vrai ou faux
-	*/
+     * Teste si un acteur possède une fiche de frais pour le mois passé en argument
+     *
+     * @param $idVisiteur int L'ID de l'acteur
+     * @param $mois String sous la forme aaaamm
+     * @return Boolean Vrai ou faux
+     */
 	public function estPremierFraisMois($idVisiteur,$mois){
 		$ok = false;
 		$req = "SELECT count(*) AS nblignesfrais FROM fichefrais
@@ -501,11 +503,11 @@ class PdoGsb{
 	}
 
 	/**
-	 * Retourne le dernier mois en cours d'un acteur
-	 *
-	 * @param $idVisiteur int L'ID de l'acteur
-	 * @return String le mois sous la forme aaaamm
-	*/
+     * Retourne le dernier mois en cours d'un acteur
+     *
+     * @param $idVisiteur int L'ID de l'acteur
+     * @return String le mois sous la forme aaaamm
+     */
 	public function dernierMoisSaisi($idVisiteur){
 		$req = "SELECT max(mois) AS dernierMois FROM fichefrais WHERE fichefrais.idvisiteur = '$idVisiteur'";
 		$res = PdoGsb::$monPdo->query($req);
@@ -568,6 +570,14 @@ class PdoGsb{
     public function recupQteEtMontTotalFF($mois)
     {
         $req = "SELECT quantite,idFraisForfait,montant FROM lignefraisforfait WHERE mois = '$mois'" ;
+        $res = PdoGsb::$monPdo->query($req);
+        $resultat = $res->fetchAll();
+        return $resultat;
+    }
+
+    public function getTtLesLignesDeFraisForfait()
+    {
+        $req = "SELECT * FROM lignefraisforfait" ;
         $res = PdoGsb::$monPdo->query($req);
         $resultat = $res->fetchAll();
         return $resultat;

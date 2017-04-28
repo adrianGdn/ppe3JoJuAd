@@ -47,5 +47,6 @@ $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois); // tableau des fr
 $lesFraisForfaitInitiaux= $pdo->getInfosFraisForfaitInitiaux(); // retourne un tableau de frais forfaits uniques avec id,libelle,montant nominal
 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$mois);
 $tabQuantitéMonatantTotaleFrais = $pdo->recupQteEtMontTotalFF($mois);
+$tabLigneFraisForfait = $pdo->getTtLesLignesDeFraisForfait();
 include("vues/v_listeFraisForfait.php");
 ?>
