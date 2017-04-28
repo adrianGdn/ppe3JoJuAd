@@ -12,24 +12,24 @@ $numMois = substr($mois, 4, 2);
 $action = $_REQUEST['action'];
 switch($action){
 	case 'saisirFrais':{
-		if($pdo->estPremierFraisMois($idVisiteur,$mois)){
-			$pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
-		}
-		break;
-	}
+            if($pdo->estPremierFraisMois($idVisiteur,$mois)){
+                $pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
+            }
+            break;
+        }
 	case 'validerMajFraisForfait':{
 
-		$lesFrais = $_REQUEST['lesFrais'];
-		if(lesQteFraisValides($lesFrais)){
-	  	 	$pdo->majFraisForfait($idVisiteur,$mois,$lesFrais);
-		}
-		else{
-			ajouterErreur("Les valeurs des frais doivent être numériques");
-			include("vues/v_erreurs.php");
-		} break;
-	}
-        case 'creationFraisForfait':{
-            
+            $lesFrais = $_REQUEST['lesFrais'];
+            if(lesQteFraisValides($lesFrais)){
+                $pdo->majFraisForfait($idVisiteur,$mois,$lesFrais);
+            }
+            else{
+                ajouterErreur("Les valeurs des frais doivent être numériques");
+                include("vues/v_erreurs.php");
+            } break;
+        }
+    case 'creationFraisForfait':{
+        echo"<script> alert('tu es passé dans le case creation frais forfait') </script>";
             $typeDuFraisForfait = $_REQUEST['typeDuFrais'];
             $idFrais = donneIdTypeFrais($typeDuFraisForfait);
             $dateDeLaDepense = $_REQUEST['dateDepense'];
@@ -37,9 +37,9 @@ switch($action){
             $quantite = $_REQUEST['quantite'];
             $tableauMontant=$pdo->getMontantFraisID($idFrais);
             $montant = $tableauMontant[0];
-            
+
             $pdo->creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$quantite,$description,$dateDeLaDepense);
-    }break;
+        }break;
 }
 
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);

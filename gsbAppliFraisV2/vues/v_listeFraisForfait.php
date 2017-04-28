@@ -9,7 +9,6 @@
 
             <label>Renseigner ma fiche de frais du mois de: </label>
 
-            <form action="index.php?uc=gererFrais&action=creationFraisForfait" method="post"></form>
             <label name="lblElemForf">Eléments forfaitisés (synthèse du mois)</label> <br/>
 
             <form class="form-horizontal" role="form" action="index.php?uc=gererFrais&action=creationFraisForfait" method="post">
@@ -46,7 +45,7 @@
                 </div>
                 <!-- bouton validation de la creation de frais forfait -->
                 <div class="horizontal-form">
-                    <input class="btn btn-primary" id="btn_valider" type="submit" value="Valider" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?> />
+                    <button class="btn btn-primary" id="btn_valider" type="submit"<?php if ($lesInfosFicheFrais['idEtat']!='CR') { echo 'disabled';} ?>>Valider</button>
                 </div>
             </form>
         </div>      

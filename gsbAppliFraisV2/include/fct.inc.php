@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Teste si un quelconque visiteur est connecté
  *
@@ -252,7 +252,7 @@ function donneIdTypeFrais($description)
 		case "Forfait Etape":
 			return  $idConverti = "ETP";
 			break;
-		case "Frais Kilometrique":
+		case "Frais Kilométrique":
 			return $idConverti = "KMN";
 			break;
 		case "Nuitée Hôtel":
