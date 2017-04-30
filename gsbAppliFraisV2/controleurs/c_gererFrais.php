@@ -29,6 +29,7 @@ switch($action){
         break;
     }
     case 'creationFraisForfait':{
+<<<<<<< HEAD
         // On récupère le type du frais
         $typeDuFraisForfait = $_REQUEST['typeDuFrais'];
         $idFrais = donneIdTypeFrais($typeDuFraisForfait);
@@ -48,6 +49,33 @@ switch($action){
         $pdo->supprimerLigneFraisForfait($idFicheFrais);
     break;
     }
+=======
+            // On récupère le type du frais
+            $typeDuFraisForfait = $_REQUEST['typeDuFrais'];
+            $idFrais = donneIdTypeFrais($typeDuFraisForfait);
+            // On récupère le jour saisi puis on y ajoute le mois et l'année actuelle
+            $dateDeLaDepense = date($_REQUEST['dateDepense'] . "/m/Y");
+            // On remplace l'objet "dateFrais" actuellement en session
+            $_SESSION['dateDepense'] = $dateDeLaDepense;
+            $description = $_REQUEST['description'];
+            $quantite = $_REQUEST['quantite'];
+            $tableauMontant=$pdo->getMontantFraisID($idFrais);
+            $montant = $tableauMontant[0];
+            $estFicheExistante = $pdo->estFicheForfaitExistante($idVisiteur,$mois,$idFrais);
+            if($estFicheExistante == true)
+            {
+                $pdo->updateLigneFraisForfait($idFrais,$idVisiteur,$mois,$quantite);
+            }
+            else
+            $pdo->creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$quantite,$description,$dateDeLaDepense);
+        }break;
+    case 'supprimerElementForfaitise':
+        {
+            $idFrais = $_REQUEST['idFrais'];
+            $pdo->deleteLigneFraisForfait($idFrais,$idVisiteur,$mois);
+            break;
+        }
+>>>>>>> origin/gsbAppliFrais-2.1.3
 }
 
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);

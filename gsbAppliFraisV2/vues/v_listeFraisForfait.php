@@ -106,6 +106,7 @@
                 <thead>
                     <?php
                         echo"<tr>";
+<<<<<<< HEAD
                             echo "<th>";
                                 echo "Description";
                             echo "</th>";
@@ -117,14 +118,34 @@
                             echo "<th>";
                                 echo "Montant";
                             echo "</th>";
+=======
+                            echo "<td>";
+                                echo $dateEntreeFiche[6];
+                            echo "</td>";
+                            echo "<td>";
+                                echo $dateEntreeFiche[2];
+                                $idFrais = $dateEntreeFiche[2];
+                            echo "</td>";
+>>>>>>> origin/gsbAppliFrais-2.1.3
 
                             echo "<th>";
                                 echo "Quantité";
                             echo "</th>";
 
+<<<<<<< HEAD
                             echo "<th>";
                                 echo ""; // Pour garder une ligne grasse
                             echo "</th>";
+=======
+                            echo "<td>";
+                                echo $dateEntreeFiche[3];
+                            echo "</td>";
+                            echo "<td>";                                    
+                            echo ('<a href="index.php?uc=gererFrais&action=supprimerElementForfaitise&idFrais='.$idFrais.'&"onclick="return confirm(\'Voulez-vous vraiment supprimer ce frais ?\');">');
+                                echo ("supprimer un élément forfaitisé");
+                            echo ("</a>");                                
+                            echo "</td>";
+>>>>>>> origin/gsbAppliFrais-2.1.3
                         echo"</tr>";
                         foreach ($tabLigneFraisForfait as $laFicheFrais){
                             echo"<tr>";

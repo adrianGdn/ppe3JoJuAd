@@ -26,7 +26,6 @@ switch($action){
             $pdo->creeNouveauFraisHorsForfait($idVisiteur,$mois,$libelle,$dateFrais,$montant);
         } break;
     }
-
     case 'supprimerFrais':{
         $idFrais = $_REQUEST['idFrais'];
         $pdo->supprimerFraisHorsForfait($idFrais);

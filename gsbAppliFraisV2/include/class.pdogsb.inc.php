@@ -113,7 +113,7 @@ class PdoGsb{
      * @return mixed l'id, le libelle et la quantité sous la forme d'un tableau associatif
      */
 	public function getLesFraisForfait($idVisiteur, $mois){
-		$req = "SELECT fraisforfait.id AS idfrais, fraisforfait.libelle AS libelle, lignefraisforfait.quantite AS quantite 
+		$req = "SELECT fraisforfait.id AS idfrais, fraisforfait.libelle AS libelle, lignefraisforfait.quantite AS quantite
         FROM lignefraisforfait INNER JOIN fraisforfait
 		ON fraisforfait.id = lignefraisforfait.idfraisforfait
 		WHERE lignefraisforfait.idvisiteur ='$idVisiteur' AND lignefraisforfait.mois='$mois'
@@ -626,5 +626,43 @@ class PdoGsb{
             $resultat = true;
         return $resultat;
     }
+<<<<<<< HEAD
 }
 ?>
+=======
+
+    /**
+     * Permet de récupérer le montant total d'une fiche de frais ainsi que la quantité de celle-ci
+     *
+     * @param $mois string Le mois où la fiche de frais a été créée
+     * @return $resultat mixed Retourne un tableau associatif contenant les informations demandé dans la requête
+     */
+    public function recupQteEtMontTotalFF($mois)
+    {
+        $req = "SELECT quantite,idFraisForfait,montant FROM lignefraisforfait WHERE mois = '$mois'" ;
+        $res = PdoGsb::$monPdo->query($req);
+        $resultat = $res->fetchAll();
+        return $resultat;
+    }
+
+    /**
+     * Permet de supprimer un frais forfaitisé d'une fiche de frais en fonction du mois, de l'id du visiteur et du type du frais
+     *
+     * @param $idVisiteur CairoSolidPattern du visiteur ayant ouvert la session
+     * @param $mois string Le mois où la fiche de frais a été créée
+     * @param $idFrais string id du frais choisi
+     */
+
+    public function deleteLigneFraisForfait($idFrais,$idVisiteur,$mois)
+    {
+        $req = "DELETE FROM lignefraisforfait WHERE idVisiteur='$idVisiteur' AND mois = '$mois' AND idFraisForfait='$idFrais'" ;
+        PdoGsb::$monPdo->exec($req);
+    }
+
+    public function updateLigneFraisForfait($idFrais,$idVisiteur,$mois,$quantite)
+    {
+        $req = "UPDATE lignefraisforfait SET quantite = '$quantite' WHERE idVisiteur ='$idVisiteur' AND idFraisForfait = '$idFrais' AND mois = '$mois'";
+        PdoGsb::$monPdo->exec($req);
+    }
+}
+>>>>>>> origin/gsbAppliFrais-2.1.3
