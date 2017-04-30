@@ -11,7 +11,7 @@
             <form class="form-horizontal" role="form" action="index.php?uc=gererFrais&action=creationFraisForfait" method="post">
                 <div class="form-group">
                     <div class="form-group">
-                        <label>Saisie d'un nouveau frais forfaitisé :</label>
+                        <h4>Saisie d'un nouveau frais forfaitisé :</h4>
                         </br>
                         <label for="slct_TypeFraisFF"> Type du frais : </label>
                         </br>
@@ -48,68 +48,111 @@
         </br>
         </br>
 
-        <table style="width:80%" border="1">
-            <label>Total des frais forfaitisées pour le mois :</label>
-                <?php
-                    $quantiteTotale = 0;
-                    foreach ($tabQuantitéMonatantTotaleFrais as $unMontant){
-                        $quantiteTotale = $quantiteTotale + $unMontant[2];
-                    }
-                    echo $quantiteTotale;
-                ?>
-            <tr>
-                <td>&nbsp;</td>
-                <td>Forfait Etape &nbsp;</td>
-                <td>Frais Kilométrique &nbsp;</td>
-                <td>Nuitée Hôtel &nbsp;</td>
-                <td>Repas Restaurant &nbsp;</td>
-            </tr>
-            <tr>
-                <td>Quantité Totale :</td>
-                <?php   foreach ($tabQuantitéMonatantTotaleFrais as $uneQuantité){
-                            echo ("<td>");
-                                echo $uneQuantité[0];
-                            echo ("</td>");
+        <div class="panel-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><!-- Colonne vide pour éviter un décallage des données --></th>
+                        <?php
+                            foreach ($lesLibelleFraisForfait as $leLibelle){
+                                echo '<th>';
+                                    echo $leLibelle['libelle'];
+                                echo '</th>';
+                            }
+                        ?>
+                    </tr>
+                </thead>
+                <tr>
+                    <th>Quantité Totale :</th>
+                    <?php
+                        foreach ($lesLibelleFraisForfait as $leLibelle){
+                            $laQuantiteDuFraisForfait = getQuantiteParTypeFrais($leLibelle['libelle'], $lesFraisForfait);
+                            echo '<td>';
+                                echo $laQuantiteDuFraisForfait;
+                            echo '</td>';
                         }
-                ?>
-            </tr>
-            <tr>
-                <td>Montant Total :</td>
-                <?php   foreach ($tabQuantitéMonatantTotaleFrais as $unMontant){
-                            echo ("<td>");
-                                echo $unMontant[2];
-                            echo ("</td>");
-                        }
-                ?>
-            </tr>
-        </table>
+                    ?>
+                </tr>
+                <tr>
+                    <th>Montant Total :</th>
+                    <?php
+                        foreach ($lesLibelleFraisForfait as $leLibelle){
+                            $laQuantiteDuFraisForfait = getQuantiteParTypeFrais($leLibelle['libelle'], $lesFraisForfait);
+                            $montantFraisForfait = $pdo->getLeMontantLigneFraisForfait($leLibelle['libelle'], $laQuantiteDuFraisForfait);
 
-        <div>
+                            echo '<td>';
+                                echo $montantFraisForfait;
+                            echo '</td>';
+                        }
+                    ?>
+                </tr>
+            </table>
+            <label>Total des frais forfaitisées pour le mois :</label>
+            <?php
+                $montantDeToutLesFraisForfait = 0;
+                foreach ($lesLibelleFraisForfait as $leLibelle){
+                    $laQuantiteDuFraisForfait = getQuantiteParTypeFrais($leLibelle['libelle'], $lesFraisForfait);
+                    $montantFraisForfait = $pdo->getLeMontantLigneFraisForfait($leLibelle['libelle'], $laQuantiteDuFraisForfait);
+
+                    $montantDeToutLesFraisForfait += $montantFraisForfait;
+                }
+                echo $montantDeToutLesFraisForfait;
+            ?>
+        </div>
+        <div class="panel-body">
             <br/>
             <label> Eléments forfaitisés (détails du mois) :</label>
-        </div>
-        <div>
-            <table width="80%" border="1">
-                <?php  foreach ($tabLigneFraisForfait as $dateEntreeFiche){
+            <table class="table">
+                <thead>
+                    <?php
                         echo"<tr>";
-                            echo "<td>";
-                                echo $dateEntreeFiche[6];
-                            echo "</td>";
+                            echo "<th>";
+                                echo "Description";
+                            echo "</th>";
 
-                            echo "<td>";
-                                echo $dateEntreeFiche[2];
-                            echo "</td>";
+                            echo "<th>";
+                                echo "Type du frais";
+                            echo "</th>";
 
-                            echo "<td>";
-                                echo $dateEntreeFiche[4];
-                            echo "</td>";
+                            echo "<th>";
+                                echo "Montant";
+                            echo "</th>";
 
-                            echo "<td>";
-                                echo $dateEntreeFiche[3];
-                            echo "</td>";
+                            echo "<th>";
+                                echo "Quantité";
+                            echo "</th>";
+
+                            echo "<th>";
+                                echo ""; // Pour garder une ligne grasse
+                            echo "</th>";
                         echo"</tr>";
-                    }
-                ?>
+                        foreach ($tabLigneFraisForfait as $laFicheFrais){
+                            echo"<tr>";
+                                echo "<td>";
+                                    echo $laFicheFrais[7];
+                                echo "</td>";
+
+                                echo "<td>";
+                                    echo $laFicheFrais[3];
+                                echo "</td>";
+
+                                echo "<td>";
+                                    echo $laFicheFrais[5];
+                                echo "</td>";
+
+                                echo "<td>";
+                                    echo $laFicheFrais[4];
+                                echo "</td>";
+
+                                $idFicheFrais = $laFicheFrais[0];
+
+                                echo "<td>";
+                                    echo '<a href="index.php?uc=gererFrais&action=supprimerFrais&id='.$idFicheFrais.'"onclick="return confirm(\'Voulez-vous vraiment supprimer ce frais?\');">Supprimer ce frais</a></td>';
+                                echo "</td>";
+                            echo"</tr>";
+                        }
+                    ?>
+                </thead>
             </table>
         </div>
     </div>

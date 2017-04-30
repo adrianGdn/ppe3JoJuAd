@@ -263,4 +263,21 @@ function donneIdTypeFrais($description)
 			break;
     }
 }
+
+/**
+ * Permet de récupérer la quantité du frais forfait en fonction de son libelle
+ *
+ * @param $typeDeFraisForfait string Le type de frais forfait
+ * @param $lesFraisForfais mixed Les frais forfaits existant en BDD
+ * @return $laQuantiteDesFrais int La quantité des frais forfaits
+ */
+function getQuantiteParTypeFrais($typeDeFraisForfait, $lesFraisForfais){
+	$laQuantiteDesFrais = 0;
+	foreach ($lesFraisForfais as $leFraisForfait){
+        if ($leFraisForfait['libelle'] == $typeDeFraisForfait){
+            $laQuantiteDesFrais = $laQuantiteDesFrais + (int)$leFraisForfait['quantite'];
+		}
+	}
+	return $laQuantiteDesFrais;
+}
 ?>
