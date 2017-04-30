@@ -133,6 +133,19 @@ class PdoGsb
     }
 
     /**
+     * Permet de récupérer les ID des frais forfaits existant en BDD
+     *
+     * @return $lesIdFrais mixed Les ID des frais forfaits existant
+     */
+    public function getLesIdFrais()
+    {
+        $req = "SELECT id FROM fraisforfait;";
+        $res = PdoGsb::$monPdo->query($req);
+        $lesIdFrais = $res->fetch();
+        return $lesIdFrais;
+    }
+
+    /**
      * Retourne tous les ID de la table FraisForfait
      *
      * @return array un tableau associatif
@@ -245,10 +258,8 @@ class PdoGsb
     {
         // Création requête
         $req = "SELECT * FROM cabinet";
-        // On formate la requête (on la prépare)
-        $res = PdoGsb::$monPdo->query($req);
         // Exécution de la requête
-        PdoGsb::$monPdo->exec($req);
+        $res = PdoGsb::$monPdo->query($req);
         // On stocke l'intégralité des résultats dans la variables $lesCabinets
         $lesCabinets = $res->fetchAll();
         // On retourne les cabinets
@@ -287,12 +298,13 @@ class PdoGsb
         $res = PdoGsb::$monPdo->query($req);
         // Stockage de la requête dans la variable $lesVisites
         $lesVisites = $res->fetchAll();
-        // Retourne les médecins
+        // Retourne les visites
         return $lesVisites;
     }
 
     /**
      * Recupère le montant du frais  en fonction de l'id du frais
+     *
      * @param $idFrais string L'identifiant de la fiche de frais
      * @return $montant double Montant de la fiche de frais
      */
@@ -331,20 +343,6 @@ class PdoGsb
         $res = PdoGsb::$monPdo->query($req);
         $tableauLigneFraisForfait = $res->fetchAll();
         return $tableauLigneFraisForfait;
-    }
-
-
-    /**
-     * Permet de récupérer les ID des frais forfaits existant en BDD
-     *
-     * @return $lesIdFrais mixed Les ID des frais forfaits existant
-     */
-    public function getLesIdFrais()
-    {
-        $req = "SELECT id FROM fraisforfait;";
-        $res = PdoGsb::$monPdo->query($req);
-        $lesIdFrais = $res->fetch();
-        return $lesIdFrais;
     }
 
     /**
@@ -400,20 +398,6 @@ class PdoGsb
     }
 
     /**
-     * Modifie l'état et la date de modification d'une fiche de frais
-     *
-     * Modifie le champ idEtat et met la date de modif à aujourd'hui
-     * @param $idVisiteur int L'ID de l'acteur
-     * @param $mois String sous la forme aaaamm
-     */
-    public function majEtatFicheFrais($idVisiteur, $mois, $etat)
-    {
-        $req = "UPDATE fichefrais SET idEtat = '$etat', dateModif = now()
-		WHERE fichefrais.idvisiteur ='$idVisiteur' AND fichefrais.mois = '$mois'";
-        PdoGsb::$monPdo->exec($req);
-    }
-
-    /**
      * Met à jour le nombre de justificatifs de la table fichefrais
      * pour le mois et l'acteur concerné
      *
@@ -425,6 +409,20 @@ class PdoGsb
     {
         $req = "UPDATE fichefrais SET nbjustificatifs = $nbJustificatifs
 		WHERE fichefrais.idvisiteur = '$idVisiteur' AND fichefrais.mois = '$mois'";
+        PdoGsb::$monPdo->exec($req);
+    }
+
+    /**
+     * Modifie l'état et la date de modification d'une fiche de frais
+     *
+     * Modifie le champ idEtat et met la date de modif à aujourd'hui
+     * @param $idVisiteur int L'ID de l'acteur
+     * @param $mois String sous la forme aaaamm
+     */
+    public function majEtatFicheFrais($idVisiteur, $mois, $etat)
+    {
+        $req = "UPDATE fichefrais SET idEtat = '$etat', dateModif = now()
+		WHERE fichefrais.idvisiteur ='$idVisiteur' AND fichefrais.mois = '$mois'";
         PdoGsb::$monPdo->exec($req);
     }
 
@@ -511,6 +509,7 @@ class PdoGsb
 
         PdoGsb::$monPdo->exec($req);
         $lesIdFrais = $this->getLesIdFrais();
+        //$unIdFrais = 0;
         foreach ($lesIdFrais as $uneLigneIdFrais) {
             $unIdFrais = $uneLigneIdFrais['idfrais'];
             $req = "INSERT INTO lignefraisforfait(idvisiteur,mois,idFraisForfait,quantite)
@@ -531,9 +530,9 @@ class PdoGsb
      */
     public function creeNouveauFraisHorsForfait($idVisiteur, $mois, $libelle, $date, $montant)
     {
-        $dateFr = dateFrancaisVersAnglais($date);
+        $dateEn = dateFrancaisVersAnglais($date);
         $req = "INSERT INTO lignefraishorsforfait
-		VALUES(DEFAULT,'$idVisiteur','$mois','$libelle','$dateFr','$montant')";
+		VALUES(DEFAULT,'$idVisiteur','$mois','$libelle','$dateEn','$montant')";
         PdoGsb::$monPdo->exec($req);
     }
 

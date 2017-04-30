@@ -54,7 +54,7 @@ $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
 $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois); // tableau des fraisForfait initiaux (id,libelle,quantite)
 $lesFraisForfaitInitiaux= $pdo->getInfosFraisForfaitInitiaux(); // retourne un tableau de frais forfaits uniques avec id,libelle,montant nominal
 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$mois); // sert lors de la saisi d'une fiche de frais forfait
-$tabLigneFraisForfait = $pdo->getLigneFraisForfait(); // récupère tout les frais forfait existant en BDD
+$tabLigneFraisForfait = $pdo->getLigneFraisForfait(); // récupère tous les frais forfait existant en BDD
 $lesLibelleFraisForfait = $pdo->getLesLibelleFraisForfait(); // récupère les libelles des fiches frais
 include("vues/v_listeFraisForfait.php");
 ?>
