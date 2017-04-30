@@ -106,25 +106,6 @@
                 <thead>
                     <?php
                         echo"<tr>";
-                            echo "<th>";
-                                echo "Description";
-                            echo "</th>";
-
-                            echo "<th>";
-                                echo "Type du frais";
-                            echo "</th>";
-
-                            echo "<th>";
-                                echo "Montant";
-                            echo "</th>";
-
-                            echo "<th>";
-                                echo "Quantité";
-                            echo "</th>";
-
-                            echo "<th>";
-                                echo ""; // Pour garder une ligne grasse
-                            echo "</th>";
                         echo"</tr>";
                         foreach ($tabLigneFraisForfait as $laFicheFrais){
                             echo"<tr>";
