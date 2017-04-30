@@ -32,7 +32,10 @@ switch($action){
             // On récupère le type du frais
             $typeDuFraisForfait = $_REQUEST['typeDuFrais'];
             $idFrais = donneIdTypeFrais($typeDuFraisForfait);
-            $dateDeLaDepense = $_REQUEST['dateDepense'];
+            // On récupère le jour saisi puis on y ajoute le mois et l'année actuelle
+            $dateDeLaDepense = date($_REQUEST['dateDepense'] . "/m/Y");
+            // On remplace l'objet "dateFrais" actuellement en session
+            $_SESSION['dateDepense'] = $dateDeLaDepense;
             $description = $_REQUEST['description'];
             $quantite = $_REQUEST['quantite'];
             $tableauMontant=$pdo->getMontantFraisID($idFrais);
