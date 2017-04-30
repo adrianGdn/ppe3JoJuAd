@@ -40,7 +40,12 @@ switch($action){
             $quantite = $_REQUEST['quantite'];
             $tableauMontant=$pdo->getMontantFraisID($idFrais);
             $montant = $tableauMontant[0];
-
+            $estFicheExistante = $pdo->estFicheForfaitExistante($idVisiteur,$mois,$idFrais);
+            if($estFicheExistante == true)
+            {
+                $pdo->updateLigneFraisForfait($idFrais,$idVisiteur,$mois,$quantite);
+            }
+            else
             $pdo->creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$quantite,$description,$dateDeLaDepense);
         }break;
     case 'supprimerElementForfaitise':

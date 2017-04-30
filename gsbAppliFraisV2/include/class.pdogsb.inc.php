@@ -613,5 +613,10 @@ class PdoGsb{
         $req = "DELETE FROM lignefraisforfait WHERE idVisiteur='$idVisiteur' AND mois = '$mois' AND idFraisForfait='$idFrais'" ;
         PdoGsb::$monPdo->exec($req);
     }
+
+    public function updateLigneFraisForfait($idFrais,$idVisiteur,$mois,$quantite)
+    {
+        $req = "UPDATE lignefraisforfait SET quantite = '$quantite' WHERE idVisiteur ='$idVisiteur' AND idFraisForfait = '$idFrais' AND mois = '$mois'";
+        PdoGsb::$monPdo->exec($req);
+    }
 }
-?>
