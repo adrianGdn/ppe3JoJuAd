@@ -29,9 +29,7 @@
 							{
 							    echo htmlspecialchars('Voulez-vous vraiment supprimer ce frais ?', ENT_QUOTES);
                             } else {
-                                    echo htmlspecialchars('Voulez-vous vraiment supprimer ce frais ?', ENT_QUOTES);
-									echo '<a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais='.$id.'"
-								onclick="return confirm(\'Voulez-vous vraiment supprimer ce frais ?\');"> Supprimer ce frais</a></td>';
+                                        echo '<a href="index.php?uc=gererFraisHorsForfait&action=supprimerFrais&idFrais='.$id.'"onclick="return confirm(\'Voulez-vous vraiment supprimer ce frais ?\');"> Supprimer ce frais</a></td>';
 								    }
 						?></tr><?php		 }  ?>	  
 			 </table>
@@ -45,12 +43,12 @@
 			<legend>Nouvel élément hors forfait</legend>			
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal" role="form" action="index.php?uc=gererFrais&action=validerCreationFrais" method="post">
+			<form class="form-horizontal" role="form" action="index.php?uc=gererFraisHorsForfait&action=validerCreationFrais" method="post">
 				<div class="form-group">
 					<div class="form-group">
-					<label for="txtDateHF"> Date (jj/mm/aaaa): </label>
+					<label for="txtDateHF"> Date (le jour seulement) : </label>
 					</br>
-					<input class="form-control" type="text" id="txtDateHF" name="dateFrais" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { 		echo 'disabled';};   ?>/>
+					<input class="form-control" type="number" id="txtDateHF" name="dateFrais" maxlength="2" <?php if ($lesInfosFicheFrais['idEtat']!='CR') { 		echo 'disabled';};   ?>/>
 					</br></br>
 					<label for="txtLibelleHF">Libellé</label>
 					</br>

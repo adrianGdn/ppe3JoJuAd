@@ -13,7 +13,7 @@ switch($action){
 		$lesMois=$pdo->getLesMoisDisponibles($idVisiteur);
 		// Afin de sélectionner par défaut le dernier mois dans la zone de liste
 		// on demande toutes les clés, et on prend la première,
-		// les mois étant triés décroissants
+		// les mois étant triés par ordre décroissants
 		$lesCles = array_keys( $lesMois );
 		$moisASelectionner = $lesCles[0];
 		include("vues/v_listeMois.php");

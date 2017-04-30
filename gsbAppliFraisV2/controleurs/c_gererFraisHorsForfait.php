@@ -12,7 +12,10 @@ $numMois = substr($mois, 4, 2);
 $action = $_REQUEST['action'];
 switch($action){
     case 'validerCreationFrais':{
-        $dateFrais = $_REQUEST['dateFrais'];
+        // On récupère le jour saisi puis on y ajoute le mois et l'année actuelle
+        $dateFrais = date($_REQUEST['dateFrais'] . "/m/Y");
+        // On remplace l'objet "dateFrais" actuellement en session
+        $_SESSION['dateFrais'] = $dateFrais;
         $libelle = $_REQUEST['libelle'];
         $montant = $_REQUEST['montant'];
         valideInfosFrais($dateFrais,$libelle,$montant);

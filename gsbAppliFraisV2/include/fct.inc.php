@@ -220,7 +220,7 @@ function getNomMois($numMois){
         '05' => "Mai",
         '06' => "Juin",
         '07' => "Juillet",
-        '08'=> "Août",
+        '08' => "Août",
         '09' => "Septembre",
         '10' => "Octobre",
         '11' => "Novembre",
@@ -253,7 +253,7 @@ function donneIdTypeFrais($description)
 			return  $idConverti = "ETP";
 			break;
 		case "Frais Kilométrique":
-			return $idConverti = "KMN";
+			return $idConverti = "KM";
 			break;
 		case "Nuitée Hôtel":
 			return $idConverti = "NUI";

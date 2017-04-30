@@ -19,10 +19,8 @@
 class PdoGsb{
     private static $serveur='mysql:host=localhost';
     private static $bdd='dbname=gsbapplifrais';
-    //private static $user='root' ;
-    //private static $mdp='' ;
-    private static $user='jojuad' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'adrian' ou 'julien' ou 'jonathan'
-    private static $mdp='AzertY!59000' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'adrian' ou 'julien' ou 'jonathan'
+    private static $user='root' ; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'jojuad'
+    private static $mdp='' ; // Pour générer en local sous Windows, laisser mdp vide sinon 'AzertY!59000'
     private static $monPdo;
     private static $monPdoGsb=null;
 
@@ -115,8 +113,8 @@ class PdoGsb{
      * @return mixed l'id, le libelle et la quantité sous la forme d'un tableau associatif
      */
 	public function getLesFraisForfait($idVisiteur, $mois){
-		$req = "SELECT fraisforfait.id AS idfrais, fraisforfait.libelle AS libelle,
-		lignefraisforfait.quantite AS quantite FROM lignefraisforfait INNER JOIN fraisforfait
+		$req = "SELECT fraisforfait.id AS idfrais, fraisforfait.libelle AS libelle, lignefraisforfait.quantite AS quantite 
+        FROM lignefraisforfait INNER JOIN fraisforfait
 		ON fraisforfait.id = lignefraisforfait.idfraisforfait
 		WHERE lignefraisforfait.idvisiteur ='$idVisiteur' AND lignefraisforfait.mois='$mois'
 		ORDER BY lignefraisforfait.idfraisforfait";
@@ -315,6 +313,19 @@ class PdoGsb{
         $tableauLigneFraisForfait = $res->fetchAll();
         return $tableauLigneFraisForfait;
     }
+
+    /**
+     * Permet de récupérer toutes les fiches de frais forfait existante
+     *
+     * @return $resultat mixed Retourne un tableau associatif contenant toutes les fiches de frais forfait
+     *
+    public function getTtLesLignesDeFraisForfait()
+    {
+        $req = "SELECT * FROM lignefraisforfait" ;
+        $res = PdoGsb::$monPdo->query($req);
+        $resultat = $res->fetchAll();
+        return $resultat;
+    }*/
 
 	/**
      * Met à jour la table lignefraisforfait pour un acteur et
@@ -557,6 +568,14 @@ class PdoGsb{
         return $estReponseCorrect;
     }
 
+    /**
+     * Permet de vérifier si une fiche de frais existe en base de données
+     *
+     * @param $idVisiteur string L'ID du visiteur associé à la fiche de frais
+     * @param $mois string Le mois où la fiche de frais a été créée
+     * @param $idFrais string L'ID de la fiche de frais
+     * @return $resultat bool Vrai si la fiche de frais existe, faux dans le cas contraire
+     */
     public function estFicheForfaitExistante($idVisiteur,$mois,$idFrais)
     {
         $req = "SELECT idVisiteur, mois, idFraisForfait FROM ligneFraisForfait WHERE idVisiteur ='$idVisiteur' AND mois = '$mois' AND idFraisForfait = '$idFrais'";
@@ -567,6 +586,12 @@ class PdoGsb{
         return $resultat;
     }
 
+    /**
+     * Permet de récupérer le montant total d'une fiche de frais ainsi que la quantité de celle-ci
+     *
+     * @param $mois string Le mois où la fiche de frais a été créée
+     * @return $resultat mixed Retourne un tableau associatif contenant les informations demandé dans la requête
+     */
     public function recupQteEtMontTotalFF($mois)
     {
         $req = "SELECT quantite,idFraisForfait,montant FROM lignefraisforfait WHERE mois = '$mois'" ;
@@ -574,14 +599,5 @@ class PdoGsb{
         $resultat = $res->fetchAll();
         return $resultat;
     }
-
-    public function getTtLesLignesDeFraisForfait()
-    {
-        $req = "SELECT * FROM lignefraisforfait" ;
-        $res = PdoGsb::$monPdo->query($req);
-        $resultat = $res->fetchAll();
-        return $resultat;
-    }
-
 }
 ?>

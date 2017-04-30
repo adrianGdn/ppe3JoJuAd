@@ -29,7 +29,7 @@ switch($action){
             } break;
         }
     case 'creationFraisForfait':{
-        //echo"<script> alert('tu es passé dans le case creation frais forfait') </script>";
+            // On récupère le type du frais
             $typeDuFraisForfait = $_REQUEST['typeDuFrais'];
             $idFrais = donneIdTypeFrais($typeDuFraisForfait);
             $dateDeLaDepense = $_REQUEST['dateDepense'];
@@ -47,6 +47,6 @@ $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois); // tableau des fr
 $lesFraisForfaitInitiaux= $pdo->getInfosFraisForfaitInitiaux(); // retourne un tableau de frais forfaits uniques avec id,libelle,montant nominal
 $lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$mois);
 $tabQuantitéMonatantTotaleFrais = $pdo->recupQteEtMontTotalFF($mois);
-$tabLigneFraisForfait = $pdo->getTtLesLignesDeFraisForfait();
+$tabLigneFraisForfait = $pdo->getLigneFraisForfait(); // récupère tout les frais forfait existant en BDD
 include("vues/v_listeFraisForfait.php");
 ?>
