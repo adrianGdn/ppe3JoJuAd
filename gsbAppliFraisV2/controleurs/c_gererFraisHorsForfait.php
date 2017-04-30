@@ -13,7 +13,13 @@ $action = $_REQUEST['action'];
 switch($action){
     case 'validerCreationFrais':{
         // On récupère le jour saisi puis on y ajoute le mois et l'année actuelle
-        $dateFrais = date($_REQUEST['dateFrais'] . "/m/Y");
+        // La boucle si permet de gérer le cas où l'utilisateur saisi "1" au lieu de "01"
+        if ($_REQUEST['dateFrais'] < 10){
+            $dateFrais = date('0'.$_REQUEST['dateFrais'] . "/m/Y");
+        }
+        else{
+            $dateFrais = date($_REQUEST['dateFrais'] . "/m/Y");
+        }
         // On remplace l'objet "dateFrais" actuellement en session
         $_SESSION['dateFrais'] = $dateFrais;
         $libelle = $_REQUEST['libelle'];
