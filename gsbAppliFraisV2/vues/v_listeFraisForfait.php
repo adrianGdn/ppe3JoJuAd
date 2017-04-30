@@ -107,6 +107,11 @@
                             echo "<td>";
                                 echo $dateEntreeFiche[3];
                             echo "</td>";
+                            echo "<td>";
+                            echo ("<a href=''>");
+                            echo ("supprimer un élément forfaitisé");
+                            echo ("</a>");
+                            echo "</td>";
                         echo"</tr>";
                     }
                 ?>
