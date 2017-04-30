@@ -335,11 +335,12 @@ class PdoGsb
     /**
      * Retourne un tableau contenant toutes les lignes de frais forfait
      *
+     * @param $idVisiteur string L'ID du visiteur associé à la fiche de frais
      * @return $tableauLigneFraisForfait array Un tableau contenant les lignes de frais forfait
      */
-    public function getLigneFraisForfait()
+    public function getLigneFraisForfait($idVisiteur)
     {
-        $req = "SELECT * FROM lignefraisforfait";
+        $req = "SELECT * FROM lignefraisforfait WHERE idVisiteur = '$idVisiteur';";
         $res = PdoGsb::$monPdo->query($req);
         $tableauLigneFraisForfait = $res->fetchAll();
         return $tableauLigneFraisForfait;
@@ -492,8 +493,8 @@ class PdoGsb
      * Créée une nouvelle fiche de frais et les lignes de frais au forfait pour un acteur et un mois donné
      *
      * Récupère le dernier mois en cours de traitement, met à 'CL' son champs idEtat, crée une nouvelle fiche de frais
+     * avec un idEtat à 'CR'
      *
-     * avec un idEtat à 'CR' et crée les lignes de frais forfait de quantités nulles
      * @param $idVisiteur int L'ID de l'acteur
      * @param $mois String sous la forme aaaamm
      */
@@ -504,18 +505,17 @@ class PdoGsb
         if ($laDerniereFiche['idEtat'] == 'CR') {
             $this->majEtatFicheFrais($idVisiteur, $dernierMois, 'CL');
         }
-        $req = "INSERT INTO fichefrais(idvisiteur,mois,nbJustificatifs,montantValide,dateModif,idEtat)
-		VALUES('$idVisiteur','$mois',0,0,now(),'CR')";
-
+        $req = "INSERT INTO fichefrais(idvisiteur, mois, nbJustificatifs, montantValide, dateModif, idEtat)
+		VALUES('$idVisiteur', '$mois', 0, 0, now(), 'CR')";
         PdoGsb::$monPdo->exec($req);
-        $lesIdFrais = $this->getLesIdFrais();
-        //$unIdFrais = 0;
+
+        /*$lesIdFrais = $this->getLesIdFrais();
         foreach ($lesIdFrais as $uneLigneIdFrais) {
             $unIdFrais = $uneLigneIdFrais['idfrais'];
-            $req = "INSERT INTO lignefraisforfait(idvisiteur,mois,idFraisForfait,quantite)
-			VALUES('$idVisiteur','$mois','$unIdFrais',0)";
+            $req = "INSERT INTO lignefraisforfait(idvisiteur, mois, idFraisForfait, quantite)
+			VALUES('$idVisiteur', '$mois', '$unIdFrais', 0)";
             PdoGsb::$monPdo->exec($req);
-        }
+        }*/
     }
 
     /**

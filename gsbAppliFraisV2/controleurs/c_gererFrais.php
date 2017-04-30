@@ -12,15 +12,15 @@ $numMois = substr($mois, 4, 2);
 $action = $_REQUEST['action'];
 switch($action){
 	case 'saisirFrais':{
-        if($pdo->estPremierFraisMois($idVisiteur,$mois)){
-            $pdo->creeNouvellesLignesFrais($idVisiteur,$mois);
+        if($pdo->estPremierFraisMois($idVisiteur, $mois)){
+            $pdo->creeNouvellesLignesFrais($idVisiteur, $mois);
         }
         break;
     }
     case 'validerMajFraisForfait':{
         $lesFrais = $_REQUEST['lesFrais'];
         if(lesQteFraisValides($lesFrais)){
-            $pdo->majFraisForfait($idVisiteur,$mois,$lesFrais);
+            $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
         }
         else{
             ajouterErreur("Les valeurs des frais doivent être numériques");
@@ -40,7 +40,7 @@ switch($action){
         $quantite = $_REQUEST['quantite'];
         $tableauMontant=$pdo->getMontantFraisID($idFrais);
         $montant = $tableauMontant[0];
-        $pdo->creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$quantite,$description,$dateDeLaDepense);
+        $pdo->creeNouveauFraisForfait($idVisiteur, $mois, $idFrais, $quantite, $description, $dateDeLaDepense);
         break;
     }
     case 'supprimerFrais':{
@@ -50,11 +50,11 @@ switch($action){
     }
 }
 
-$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
-$lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$mois); // tableau des fraisForfait initiaux (id,libelle,quantite)
+$lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
+$lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur, $mois); // tableau des fraisForfait initiaux (id,libelle,quantite)
 $lesFraisForfaitInitiaux= $pdo->getInfosFraisForfaitInitiaux(); // retourne un tableau de frais forfaits uniques avec id,libelle,montant nominal
-$lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur,$mois); // sert lors de la saisi d'une fiche de frais forfait
-$tabLigneFraisForfait = $pdo->getLigneFraisForfait(); // récupère tous les frais forfait existant en BDD
+$lesInfosFicheFrais = $pdo->getLesInfosFicheFrais($idVisiteur, $mois); // sert lors de la saisi d'une fiche de frais forfait
+$tabLigneFraisForfait = $pdo->getLigneFraisForfait($idVisiteur); // récupère tous les frais forfait existant en BDD
 $lesLibelleFraisForfait = $pdo->getLesLibelleFraisForfait(); // récupère les libelles des fiches frais
 include("vues/v_listeFraisForfait.php");
 ?>
