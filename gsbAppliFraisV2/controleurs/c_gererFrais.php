@@ -43,6 +43,12 @@ switch($action){
 
             $pdo->creeNouveauFraisForfait($idVisiteur,$mois,$idFrais,$quantite,$description,$dateDeLaDepense);
         }break;
+    case 'supprimerElementForfaitise':
+        {
+            $idFrais = $_REQUEST['idFrais'];
+            $pdo->deleteLigneFraisForfait($idFrais,$idVisiteur,$mois);
+            break;
+        }
 }
 
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$mois);
