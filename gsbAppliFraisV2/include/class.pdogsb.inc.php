@@ -16,12 +16,20 @@
  * @link       http://www.php.net/manual/fr/book.pdo.php
  */
 
+<<<<<<< HEAD
 class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsbapplifrais';
     private static $user = 'root'; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'jojuad'
     private static $mdp = ''; // Pour générer en local sous Windows, laisser mdp vide sinon 'AzertY!59000'
+=======
+class PdoGsb{
+    private static $serveur='mysql:host=localhost';
+    private static $bdd='dbname=gsbapplifrais';
+    private static $user= 'jojuad'; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'jojuad'
+    private static $mdp= 'AzertY!59000'; // Pour générer en local sous Windows, laisser mdp vide sinon 'AzertY!59000'
+>>>>>>> origin/gsbAppliFrais-2.1.3
     private static $monPdo;
     private static $monPdoGsb = null;
 
@@ -663,4 +671,47 @@ class PdoGsb
             $resultat = true;
         return $resultat;
     }
+<<<<<<< HEAD
 }
+=======
+<<<<<<< HEAD
+}
+?>
+=======
+
+    /**
+     * Permet de récupérer le montant total d'une fiche de frais ainsi que la quantité de celle-ci
+     *
+     * @param $mois string Le mois où la fiche de frais a été créée
+     * @return $resultat mixed Retourne un tableau associatif contenant les informations demandé dans la requête
+     */
+    public function recupQteEtMontTotalFF($mois)
+    {
+        $req = "SELECT quantite,idFraisForfait,montant FROM lignefraisforfait WHERE mois = '$mois'" ;
+        $res = PdoGsb::$monPdo->query($req);
+        $resultat = $res->fetchAll();
+        return $resultat;
+    }
+
+    /**
+     * Permet de supprimer un frais forfaitisé d'une fiche de frais en fonction du mois, de l'id du visiteur et du type du frais
+     *
+     * @param $idVisiteur CairoSolidPattern du visiteur ayant ouvert la session
+     * @param $mois string Le mois où la fiche de frais a été créée
+     * @param $idFrais string id du frais choisi
+     */
+
+    public function deleteLigneFraisForfait($idFrais,$idVisiteur,$mois)
+    {
+        $req = "DELETE FROM lignefraisforfait WHERE idVisiteur='$idVisiteur' AND mois = '$mois' AND idFraisForfait='$idFrais'" ;
+        PdoGsb::$monPdo->exec($req);
+    }
+
+    public function updateLigneFraisForfait($idFrais,$idVisiteur,$mois,$quantite)
+    {
+        $req = "UPDATE lignefraisforfait SET quantite = '$quantite' WHERE idVisiteur ='$idVisiteur' AND idFraisForfait = '$idFrais' AND mois = '$mois'";
+        PdoGsb::$monPdo->exec($req);
+    }
+}
+>>>>>>> origin/gsbAppliFrais-2.1.3
+>>>>>>> origin/gsbAppliFrais-2.1.3
