@@ -95,9 +95,9 @@
                             echo "<td>";
                                 echo $dateEntreeFiche[6];
                             echo "</td>";
-
                             echo "<td>";
                                 echo $dateEntreeFiche[2];
+                                $idFrais = $dateEntreeFiche[2];
                             echo "</td>";
 
                             echo "<td>";
@@ -107,10 +107,10 @@
                             echo "<td>";
                                 echo $dateEntreeFiche[3];
                             echo "</td>";
-                            echo "<td>";
-                            echo ("<a href=''>");
-                            echo ("supprimer un élément forfaitisé");
-                            echo ("</a>");
+                            echo "<td>";                                    
+                            echo ('<a href="index.php?uc=gererFrais&action=supprimerElementForfaitise&idFrais='.$idFrais.'&"onclick="return confirm(\'Voulez-vous vraiment supprimer ce frais ?\');">');
+                                echo ("supprimer un élément forfaitisé");
+                            echo ("</a>");                                
                             echo "</td>";
                         echo"</tr>";
                     }
