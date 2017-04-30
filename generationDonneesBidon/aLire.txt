@@ -1,6 +1,0 @@
-Pour l'actualisation des tables FicheForfait, LignesFraisForfait et LignesFraisHorsForfait, il faut :
-- Avoir installe la base et les tables FraisForfait, Visiteur et Etat
-- Copier le dossier dans le repertoire de publication
-- Ouvrir avec un editeur le fichier GSB-generation.php
-- Remplacer les valeurs de la connexion a la base avec vos parametres
-- Lancer l'interpretation du script avec le navigateur
