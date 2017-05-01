@@ -17,9 +17,9 @@ include("vues/v_adminCRUD.php"); ?>
             {
             ?>
             <p>
-                <strong>ID :</strong> <?php echo $donnees['id']; ?><br />
-                <strong>Libelle :</strong><?php echo $donnees['libelle']; ?><br />
-                <strong>Montant :</strong><?php echo $donnees['montant']; ?> <br />
+                <strong>ID : </strong> <?php echo $donnees['id']; ?><br />
+                <strong>Libelle : </strong><?php echo $donnees['libelle']; ?><br />
+                <strong>Montant : </strong><?php echo $donnees['montant']; ?> <br />
             </p>
             <?php
             }

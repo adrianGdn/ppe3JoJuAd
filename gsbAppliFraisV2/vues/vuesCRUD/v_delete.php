@@ -12,8 +12,7 @@ include("vues/v_adminCRUD.php");
 
             <p>
                 <label>Entrer l'ID du frais à supprimer</label><br />
-                <label>ID :</label>
-                <input type="text" name="ID" id="id" placeholder="Ex : ABC" maxlength="3" /><br />
+                <label>ID : </label><input type="text" name="ID" id="id" placeholder="Ex : ABC" maxlength="3" /><br />
 
             </p>
 
