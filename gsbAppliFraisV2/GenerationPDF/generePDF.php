@@ -13,6 +13,8 @@ $idVisiteur=$_GET['idVisiteur'];
 $leMois = $_GET['leMois'];
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur,$leMois);
 $lesFraisForfait= $pdo->getLesFraisForfait($idVisiteur,$leMois);
+$lesLibellesFrais = $pdo->getLesLibelleFraisForfait();
+
 $numMois =substr( $leMois,4,2);
 $numAnnee = $_GET['numAnnee'];
 $nomMois = getNomMois($numMois);
@@ -51,9 +53,9 @@ $pdf->Cell(1,15,utf8_decode('Voici la liste des Frais Forfaits :'));
 $pdf->SetFont('Arial','',11);
 $pdf->Ln();
 
-foreach (  $lesFraisForfait as $unFraisForfait  ) {
-    $libelle = $unFraisForfait['libelle'];
-    $quantite = $unFraisForfait['quantite'];
+foreach ( $lesLibellesFrais as $unLibelleFrais ) {
+    $libelle = $unLibelleFrais['libelle'];
+    $quantite = $laQuantiteDuFraisForfait = getQuantiteParTypeFrais($unLibelleFrais['libelle'], $lesFraisForfait);
     $pdf->Cell(0,10,utf8_decode($libelle.'      '.$quantite),0,1);
 }
 

@@ -7,16 +7,15 @@
             </br></br>
             <h3>Etat : <?php echo $libEtat?> depuis le <?php echo $dateModif?> </h3>
             </br></br>
-
             <table class="table">
                 </br></br>
                 <caption>Eléments forfaitisés </caption>
                 <tr>
                     <?php
                     $a = '<table><tr>';
-                    foreach ( $lesFraisForfait as $unFraisForfait )
+                    foreach ( $lesLibellesFrais as $unLibelleFrais )
                     {
-                        $libelle = $unFraisForfait['libelle'];
+                        $libelle = $unLibelleFrais['libelle'];
                         $a.= '<th>'.$libelle.'</th>';
                     ?>
                     <th> <?php echo $libelle?></th>
@@ -27,9 +26,10 @@
                 <tr>
                 <?php
                     $a.='</tr><tr>';
-                    foreach (  $lesFraisForfait as $unFraisForfait  )
+                    foreach ( $lesLibellesFrais as $unLibelleFrais )
                     {
-                        $quantite = $unFraisForfait['quantite'];
+                        $quantite = $laQuantiteDuFraisForfait = getQuantiteParTypeFrais($unLibelleFrais['libelle'], $lesFraisForfait);
+
                         $a.='<td>'.$quantite.'</td>';
                     ?>
                     <td class="qteForfait"><?php echo $quantite?> </td>
