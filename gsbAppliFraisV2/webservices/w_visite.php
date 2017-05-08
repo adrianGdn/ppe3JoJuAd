@@ -17,9 +17,9 @@ $pdo = PdoGsb::getPdoGsb();
 //récupère les medecins de la BDD
 $tabVisites = $pdo->getLesVisites($idActeur);
 
+
 //renvoi en json
 
-header('Content-type: application/json');
 echo json_encode(array('visite'=>$tabVisites));
 
 ?>

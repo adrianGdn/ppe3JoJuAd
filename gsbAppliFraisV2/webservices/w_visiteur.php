@@ -19,10 +19,8 @@ if(isset($_GET['login'])&& isset($_GET['pass']))//requière l'id de l'utilisateu
 $pdo = PdoGsb::getPdoGsb();
 
 //récupère les medecins de la BDD
-$tabVisiteur = $pdo->getLeVisiteur($login,$mdpActeur);
+
+$Visiteur = $pdo->getLeVisiteur($login,$mdpActeur);
 //renvoi en json
-
-header('Content-type: application/json');
-echo json_encode(array('visiteur'=>$tabVisiteur));
-
+echo json_encode(array('Acteur'=>$Visiteur));
 ?>

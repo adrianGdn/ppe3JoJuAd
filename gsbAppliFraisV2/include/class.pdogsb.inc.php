@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Classe d'accès aux données.
@@ -20,6 +20,8 @@ class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsbapplifrais';
+    //private static $user = 'root';
+    //private static $mdp = '';
     private static $user = 'jojuad'; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'jojuad'
     private static $mdp = 'AzertY!59000'; // Pour générer en local sous Windows, laisser mdp vide sinon 'AzertY!59000'
     private static $monPdo;
@@ -35,7 +37,7 @@ class PdoGsb
         PdoGsb::$monPdo->query("SET CHARACTER SET utf8");
     }
 
-    public function _destruct()
+    public function __destruct()
     {
         PdoGsb::$monPdo = null;
     }
@@ -240,11 +242,11 @@ class PdoGsb
     public function getLeVisiteur($login, $mdp)
     {
         // Création de la requête (sélectionne un visiteur en fction du login/mdp et de son id = 2 (visiteur)
-        $req = "SELECT * FROM acteur WHERE acteur.idTypeActeur = '2'AND WHERE acteur.login='$login' AND WHERE acteur.mdp='$mdp'";
+        $req = "SELECT * FROM acteur WHERE acteur.idTypeActeur = '2' AND acteur.login='$login' AND acteur.mdp='$mdp'";
         // Exécution de la requête
         $res = PdoGsb::$monPdo->query($req);
         // Stockage de la requête dans $lesVisiteurs
-        $lesVisiteurs = $res->fetchAll();
+        $lesVisiteurs = $res->fetch(PDO::FETCH_ASSOC);
         // Retourne $lesVisiteurs
         return $lesVisiteurs;
     }
@@ -261,7 +263,7 @@ class PdoGsb
         // Exécution de la requête
         $res = PdoGsb::$monPdo->query($req);
         // On stocke l'intégralité des résultats dans la variables $lesCabinets
-        $lesCabinets = $res->fetchAll();
+        $lesCabinets = $res->fetchAll(PDO::FETCH_ASSOC);
         // On retourne les cabinets
         return $lesCabinets;
     }
@@ -279,7 +281,7 @@ class PdoGsb
         // Exécution de la requête
         $res = PdoGsb::$monPdo->query($req);
         // Stockage de la requête dans la variable $lesMedecins
-        $lesMedecins = $res->fetchAll();
+        $lesMedecins = $res->fetchAll(PDO::FETCH_ASSOC);
         // Retourne les médecins
         return $lesMedecins;
     }
@@ -297,7 +299,7 @@ class PdoGsb
         // Exécution de la requête
         $res = PdoGsb::$monPdo->query($req);
         // Stockage de la requête dans la variable $lesVisites
-        $lesVisites = $res->fetchAll();
+        $lesVisites = $res->fetchAll(PDO::FETCH_ASSOC);
         // Retourne les visites
         return $lesVisites;
     }
