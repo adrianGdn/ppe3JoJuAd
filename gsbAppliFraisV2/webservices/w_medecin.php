@@ -19,6 +19,6 @@ $tabMedecins = $pdo->getLesMedecins($idActeur);
 
 //renvoi en json
 
-echo json_encode('medecins'=>$tabMedecins);
+echo json_encode(array('medecins'=>$tabMedecins));
 
 ?>
