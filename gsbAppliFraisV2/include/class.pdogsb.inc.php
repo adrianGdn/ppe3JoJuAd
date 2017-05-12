@@ -20,8 +20,6 @@ class PdoGsb
 {
     private static $serveur = 'mysql:host=localhost';
     private static $bdd = 'dbname=gsbapplifrais';
-    //private static $user = 'root';
-    //private static $mdp = '';
     private static $user = 'jojuad'; // Pour générer en local sous Windows, utiliser en user 'root' sinon 'jojuad'
     private static $mdp = 'AzertY!59000'; // Pour générer en local sous Windows, laisser mdp vide sinon 'AzertY!59000'
     private static $monPdo;
