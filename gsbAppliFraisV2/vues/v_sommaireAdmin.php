@@ -41,7 +41,7 @@
                 <li class="active"><a href="index.php?uc=gererFrais&action=saisirFrais">Saisir frais forfaitisé</a></li>
                 <li class="active"><a href="index.php?uc=gererFraisHorsForfait&action=saisirFraisHorsForfait">Saisir frais hors forfait</a></li>
                 <li class="active"><a href="index.php?uc=etatFrais&action=selectionnerMois">Mes fiches de frais</a></li>
-                <li class="active"><a href="http://172.16.8.12/glpi/">GLPI</a></li>
+                <li class="active"><a href="http://172.16.9.12/glpi/">GLPI</a></li>
                 <li class="active"><a href="#">Telecharger l'application mobile</a></li>
                 <li class="active"><a href="index.php?uc=admin&action=selectionnerCRUD">CRUD de l'administrateur</a></li>
             </ul>
