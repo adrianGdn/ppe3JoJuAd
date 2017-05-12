@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Classe d'accès aux données.
