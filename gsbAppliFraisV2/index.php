@@ -28,6 +28,9 @@ if($estEnMaintenance == false){
         case 'admin' :{
             include("controleurs/c_admin.php");break;
         }
+        case 'vehicule' :{
+            include("controleurs/c_vehicule.php");break;
+        }
     }
 }
 else {

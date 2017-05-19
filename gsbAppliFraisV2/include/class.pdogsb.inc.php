@@ -662,4 +662,19 @@ class PdoGsb
             $resultat = true;
         return $resultat;
     }
+    
+    public function createVehicule($libelle, $immat, $puissanceVehicule, $idActeur){
+        $req = "INSERT INTO vehicule(libelle, immatriculation, idPuissanceVehicule, idActeur)
+		VALUES('$libelle',$immat,'$puissanceVehicule', '$idActeur')";
+        
+        echo $req;
+        PdoGsb::$monPdo->exec($req);
+    }
+    
+    public function getLesPuissances(){
+        $req = "SELECT puissance FROM puissancevehicule";
+        $rs = PdoGsb::$monPdo->query($req);
+        $ligne = $rs->fetchAll();
+        return $ligne;
+    }
 }
